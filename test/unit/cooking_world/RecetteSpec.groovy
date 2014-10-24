@@ -9,7 +9,7 @@ import spock.lang.Unroll
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(Recette)
-@Mock([Utilisateur,Notes])
+@Mock([Utilisateur,Notes,Commentaire])
 class RecetteSpec extends Specification {
 
     Recette recette
@@ -109,6 +109,13 @@ class RecetteSpec extends Specification {
         recette.getNotes()[0].getClarte()==2
 
     }
-
+    void "test ajouter un commentaire à une recette  "() {
+        given: "un commentaire "
+        def commentaire = Mock(Commentaire)
+        when: " la recette est commentée"
+        recette.addToCommentaire(commentaire)
+        then: "le commentaire est enregistrée"
+       recette.getCommentaire().size() == 1
+    }
 
 }

@@ -9,7 +9,7 @@ import spock.lang.Unroll
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(Utilisateur)
-@Mock([Recette,Notes])
+@Mock([Recette,Notes,Commentaire])
 class UtilisateurSpec extends Specification {
 
     Utilisateur utilisateur
@@ -57,6 +57,14 @@ class UtilisateurSpec extends Specification {
         utilisateur.addToNotes(note)
         then: "l'utilisateur a noté une nouvelle recette"
         utilisateur.getNotes().size() == 1
+    }
+    void "test ajouter un commentaire  "() {
+        given: "un commentaire "
+        def commentaire = Mock(Commentaire)
+        when: " l'utilisateur soumet un commentaire"
+        utilisateur.addToCommentaire(commentaire)
+        then: "le commentaire est enregistrée"
+        utilisateur.getCommentaire().size() == 1
     }
 
 }
