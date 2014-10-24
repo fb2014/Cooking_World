@@ -1,5 +1,6 @@
 package cooking_world
 
+import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 import spock.lang.Unroll
@@ -8,14 +9,18 @@ import spock.lang.Unroll
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
 @TestFor(Recette)
+@Mock([Utilisateur,Notes])
 class RecetteSpec extends Specification {
 
     Recette recette
+    Utilisateur mon_user
+    Notes mes_notes
 
     def setup() {
         recette = new Recette()
+        mon_user=Mock(Utilisateur)
+        mes_notes=Mock(Notes)
     }
-
     def cleanup() {
     }
 
@@ -82,4 +87,28 @@ class RecetteSpec extends Specification {
         "Titre" | "photo"  | "ingredient, ingredient" | "description" | 10         | 15           | new Date('10/10/2010') | true
 
     }
+
+    void "test une recette avec une note"(){
+        given:"une recette à noter"
+        recette.titre = "ma recette"
+        recette.filename = "ma photo"
+        recette.ingredients = "mes ingredients"
+        recette.description = " description"
+        recette.tempsPreparation = 10
+        recette.tempsCuisson = 3
+        recette.dateCreation = new Date('10/10/2010')
+
+        when:"on associe une note à la recette"
+        mes_notes.clarte >> 2
+        mes_notes.difficulte >> 4
+        mes_notes.gout >> 0
+        recette.addToNotes(mes_notes)
+
+        then: "on a une note de plus pour la recette"
+        recette.getNotes().size()==1
+        recette.getNotes()[0].getClarte()==2
+
+    }
+
+
 }
