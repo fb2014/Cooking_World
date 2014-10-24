@@ -10,7 +10,7 @@ class Recette {
     Date dateCreation
     String filename
     static belongsTo = [Utilisateur]
-    static hasMany = [notes : Notes, coupDeCoeur : CoupDeCoeur]
+    static hasMany = [notes : Notes, coupDeCoeur : CoupDeCoeur,commentaire:Commentaire]
 
     static constraints = {
         titre (nullable : false, blank : false)
