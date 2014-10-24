@@ -65,3 +65,30 @@
 
 </div>
 
+<div class="fieldcontain ${hasErrors(bean: recetteInstance, field: 'commentaire', 'error')} ">
+	<label for="commentaire">
+		<g:message code="recette.commentaire.label" default="Commentaire" />
+		
+	</label>
+	<g:select name="commentaire" from="${cooking_world.Commentaire.list()}" multiple="multiple" optionKey="id" size="5" value="${recetteInstance?.commentaire*.id}" class="many-to-many"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: recetteInstance, field: 'coupDeCoeur', 'error')} ">
+	<label for="coupDeCoeur">
+		<g:message code="recette.coupDeCoeur.label" default="Coup De Coeur" />
+		
+	</label>
+	<g:select name="coupDeCoeur" from="${cooking_world.CoupDeCoeur.list()}" multiple="multiple" optionKey="id" size="5" value="${recetteInstance?.coupDeCoeur*.id}" class="many-to-many"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: recetteInstance, field: 'notes', 'error')} ">
+	<label for="notes">
+		<g:message code="recette.notes.label" default="Notes" />
+		
+	</label>
+	<g:select name="notes" from="${cooking_world.Notes.list()}" multiple="multiple" optionKey="id" size="5" value="${recetteInstance?.notes*.id}" class="many-to-many"/>
+
+</div>
+

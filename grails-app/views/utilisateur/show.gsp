@@ -41,6 +41,50 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${utilisateurInstance?.commentaire}">
+				<li class="fieldcontain">
+					<span id="commentaire-label" class="property-label"><g:message code="utilisateur.commentaire.label" default="Commentaire" /></span>
+					
+						<g:each in="${utilisateurInstance.commentaire}" var="c">
+						<span class="property-value" aria-labelledby="commentaire-label"><g:link controller="commentaire" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${utilisateurInstance?.coupDeCoeur}">
+				<li class="fieldcontain">
+					<span id="coupDeCoeur-label" class="property-label"><g:message code="utilisateur.coupDeCoeur.label" default="Coup De Coeur" /></span>
+					
+						<g:each in="${utilisateurInstance.coupDeCoeur}" var="c">
+						<span class="property-value" aria-labelledby="coupDeCoeur-label"><g:link controller="coupDeCoeur" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${utilisateurInstance?.notes}">
+				<li class="fieldcontain">
+					<span id="notes-label" class="property-label"><g:message code="utilisateur.notes.label" default="Notes" /></span>
+					
+						<g:each in="${utilisateurInstance.notes}" var="n">
+						<span class="property-value" aria-labelledby="notes-label"><g:link controller="notes" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${utilisateurInstance?.recette}">
+				<li class="fieldcontain">
+					<span id="recette-label" class="property-label"><g:message code="utilisateur.recette.label" default="Recette" /></span>
+					
+						<g:each in="${utilisateurInstance.recette}" var="r">
+						<span class="property-value" aria-labelledby="recette-label"><g:link controller="recette" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
+						</g:each>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:utilisateurInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

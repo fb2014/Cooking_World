@@ -29,21 +29,3 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: notesInstance, field: 'recette', 'error')} required">
-	<label for="recette">
-		<g:message code="notes.recette.label" default="Recette" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="recette" name="recette.id" from="${cooking_world.Recette.list()}" optionKey="id" required="" value="${notesInstance?.recette?.id}" class="many-to-one"/>
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: notesInstance, field: 'utilisateur', 'error')} required">
-	<label for="utilisateur">
-		<g:message code="notes.utilisateur.label" default="Utilisateur" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="utilisateur" name="utilisateur.id" from="${cooking_world.Utilisateur.list()}" optionKey="id" required="" value="${notesInstance?.utilisateur?.id}" class="many-to-one"/>
-
-</div>
-

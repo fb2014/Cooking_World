@@ -2,7 +2,7 @@ package cooking_world
 
 class CoupDeCoeur {
 
-    Boolean aime
+    Date date
 
     static belongsTo = [Utilisateur,Recette]
     static constraints = {
