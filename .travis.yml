@@ -12,5 +12,5 @@ before_deploy:
 
 deploy:
   provider: heroku
-  api_key: "9088aac5-684e-4036-ac74-961635ba7693"
+  api_key: "fe7e46ab-69f5-4581-8bfb-d0f457e8ee49"
   app: cooking-world
