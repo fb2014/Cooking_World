@@ -28,7 +28,11 @@
 					
 						<g:sortableColumn property="gout" title="${message(code: 'notes.gout.label', default: 'Gout')}" />
 					
-						<g:sortableColumn property="difficulte" title="${message(code: 'notes.difficulte.label', default: 'Difficulte')}" />
+						<g:sortableColumn property="simplicite" title="${message(code: 'notes.simplicite.label', default: 'Simplicite')}" />
+					
+						<th><g:message code="notes.recette.label" default="Recette" /></th>
+					
+						<th><g:message code="notes.utilisateur.label" default="Utilisateur" /></th>
 					
 					</tr>
 				</thead>
@@ -40,7 +44,11 @@
 					
 						<td>${fieldValue(bean: notesInstance, field: "gout")}</td>
 					
-						<td>${fieldValue(bean: notesInstance, field: "difficulte")}</td>
+						<td>${fieldValue(bean: notesInstance, field: "simplicite")}</td>
+					
+						<td>${fieldValue(bean: notesInstance, field: "recette")}</td>
+					
+						<td>${fieldValue(bean: notesInstance, field: "utilisateur")}</td>
 					
 					</tr>
 				</g:each>

@@ -11,8 +11,10 @@ class NotesControllerSpec extends Specification {
     def populateValidParams(params) {
         assert params != null
         params["gout"] = 1
-        params["difficulte"] = 0
+        params["simplicite"] = 0
         params["clarte"] = 4
+        params["utilisateur.id"] = 1
+        params["recette.id"] = 1
 
     }
 

@@ -23,29 +23,45 @@
 			</g:if>
 			<ol class="property-list notes">
 			
-				<g:if test="${notesInstance?.clarte}">
+
 				<li class="fieldcontain">
 					<span id="clarte-label" class="property-label"><g:message code="notes.clarte.label" default="Clarte" /></span>
 					
 						<span class="property-value" aria-labelledby="clarte-label"><g:fieldValue bean="${notesInstance}" field="clarte"/></span>
 					
 				</li>
-				</g:if>
 			
-				<g:if test="${notesInstance?.gout}">
+
 				<li class="fieldcontain">
 					<span id="gout-label" class="property-label"><g:message code="notes.gout.label" default="Gout" /></span>
 					
 						<span class="property-value" aria-labelledby="gout-label"><g:fieldValue bean="${notesInstance}" field="gout"/></span>
 					
 				</li>
+			
+
+				<li class="fieldcontain">
+					<span id="simplicite-label" class="property-label"><g:message code="notes.simplicite.label" default="Simplicite" /></span>
+					
+						<span class="property-value" aria-labelledby="simplicite-label"><g:fieldValue bean="${notesInstance}" field="simplicite"/></span>
+					
+				</li>
+
+			
+				<g:if test="${notesInstance?.recette}">
+				<li class="fieldcontain">
+					<span id="recette-label" class="property-label"><g:message code="notes.recette.label" default="Recette" /></span>
+					
+						<span class="property-value" aria-labelledby="recette-label"><g:link controller="recette" action="show" id="${notesInstance?.recette?.id}">${notesInstance?.recette?.encodeAsHTML()}</g:link></span>
+					
+				</li>
 				</g:if>
 			
-				<g:if test="${notesInstance?.difficulte}">
+				<g:if test="${notesInstance?.utilisateur}">
 				<li class="fieldcontain">
-					<span id="difficulte-label" class="property-label"><g:message code="notes.difficulte.label" default="Difficulte" /></span>
+					<span id="utilisateur-label" class="property-label"><g:message code="notes.utilisateur.label" default="Utilisateur" /></span>
 					
-						<span class="property-value" aria-labelledby="difficulte-label"><g:fieldValue bean="${notesInstance}" field="difficulte"/></span>
+						<span class="property-value" aria-labelledby="utilisateur-label"><g:link controller="utilisateur" action="show" id="${notesInstance?.utilisateur?.id}">${notesInstance?.utilisateur?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
