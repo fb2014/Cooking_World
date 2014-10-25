@@ -24,6 +24,10 @@
 			<thead>
 					<tr>
 					
+						<th><g:message code="coupDeCoeur.utilisateur.label" default="Utilisateur" /></th>
+					
+						<th><g:message code="coupDeCoeur.recette.label" default="Recette" /></th>
+					
 						<g:sortableColumn property="date" title="${message(code: 'coupDeCoeur.date.label', default: 'Date')}" />
 					
 					</tr>
@@ -32,7 +36,11 @@
 				<g:each in="${coupDeCoeurInstanceList}" status="i" var="coupDeCoeurInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${coupDeCoeurInstance.id}">${fieldValue(bean: coupDeCoeurInstance, field: "date")}</g:link></td>
+						<td><g:link action="show" id="${coupDeCoeurInstance.id}">${fieldValue(bean: coupDeCoeurInstance, field: "utilisateur")}</g:link></td>
+					
+						<td>${fieldValue(bean: coupDeCoeurInstance, field: "recette")}</td>
+					
+						<td><g:formatDate date="${coupDeCoeurInstance.date}" /></td>
 					
 					</tr>
 				</g:each>

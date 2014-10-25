@@ -23,6 +23,24 @@
 			</g:if>
 			<ol class="property-list coupDeCoeur">
 			
+				<g:if test="${coupDeCoeurInstance?.utilisateur}">
+				<li class="fieldcontain">
+					<span id="utilisateur-label" class="property-label"><g:message code="coupDeCoeur.utilisateur.label" default="Utilisateur" /></span>
+					
+						<span class="property-value" aria-labelledby="utilisateur-label"><g:link controller="utilisateur" action="show" id="${coupDeCoeurInstance?.utilisateur?.id}">${coupDeCoeurInstance?.utilisateur?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${coupDeCoeurInstance?.recette}">
+				<li class="fieldcontain">
+					<span id="recette-label" class="property-label"><g:message code="coupDeCoeur.recette.label" default="Recette" /></span>
+					
+						<span class="property-value" aria-labelledby="recette-label"><g:link controller="recette" action="show" id="${coupDeCoeurInstance?.recette?.id}">${coupDeCoeurInstance?.recette?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${coupDeCoeurInstance?.date}">
 				<li class="fieldcontain">
 					<span id="date-label" class="property-label"><g:message code="coupDeCoeur.date.label" default="Date" /></span>

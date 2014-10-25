@@ -11,6 +11,8 @@ class CoupDeCoeurControllerSpec extends Specification {
     def populateValidParams(params) {
         assert params != null
         params["date"] = new Date()
+        params["utilisateur.id"] = 1
+        params["recette.id"] = 1
     }
 
     void "Test the index action returns the correct model"() {
