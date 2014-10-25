@@ -100,7 +100,7 @@ class RecetteSpec extends Specification {
 
         when:"on associe une note à la recette"
         mes_notes.clarte >> 2
-        mes_notes.difficulte >> 4
+        mes_notes.simplicite >> 4
         mes_notes.gout >> 0
         recette.addToNotes(mes_notes)
 

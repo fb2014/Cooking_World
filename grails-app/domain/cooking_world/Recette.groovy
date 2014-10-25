@@ -9,7 +9,7 @@ class Recette {
     Integer tempsCuisson
     Date dateCreation
     String filename
-    static belongsTo = [Utilisateur]
+    static belongsTo = [utilisateur : Utilisateur]
     static hasMany = [notes : Notes, coupDeCoeur : CoupDeCoeur,commentaire:Commentaire]
 
     static constraints = {
@@ -21,6 +21,7 @@ class Recette {
         description (widget:'textarea', nullable:false, blank:false)
         dateCreation()
         filename(blank:true, nullable:true,display:false)
+        utilisateur(nullable : false, blank: false)
     }
 
     @Override

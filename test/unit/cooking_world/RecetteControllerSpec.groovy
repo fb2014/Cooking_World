@@ -18,6 +18,7 @@ class RecetteControllerSpec extends Specification {
         params["tempsCuisson"] = 2
         params["dateCreation"] = new Date()
         params["fileName"] = 'fileName'
+        params["utilisateur.id"] = 2
 
     }
 
