@@ -32,6 +32,24 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${commentaireInstance?.recette}">
+				<li class="fieldcontain">
+					<span id="recette-label" class="property-label"><g:message code="commentaire.recette.label" default="Recette" /></span>
+					
+						<span class="property-value" aria-labelledby="recette-label"><g:link controller="recette" action="show" id="${commentaireInstance?.recette?.id}">${commentaireInstance?.recette?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${commentaireInstance?.utilisateur}">
+				<li class="fieldcontain">
+					<span id="utilisateur-label" class="property-label"><g:message code="commentaire.utilisateur.label" default="Utilisateur" /></span>
+					
+						<span class="property-value" aria-labelledby="utilisateur-label"><g:link controller="utilisateur" action="show" id="${commentaireInstance?.utilisateur?.id}">${commentaireInstance?.utilisateur?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 			</ol>
 			<g:form url="[resource:commentaireInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

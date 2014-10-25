@@ -13,6 +13,8 @@ class CommentaireControllerSpec extends Specification {
         assert params != null
 
         params["message"] = "Hello"
+        params["utilisateur.id"] = 1
+        params["recette.id"] = 1
     }
 
     void "Test the index action returns the correct model"() {
