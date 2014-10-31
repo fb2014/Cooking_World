@@ -48,7 +48,8 @@ body {
 }
 
 #grailsLogo {
-	background-color: #abbf78;
+	background-color: #ed6b06;
+    min-height: 150px;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -65,7 +66,7 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #48802c;
+	color: #000000;
 }
 
 a:hover, a:active {
@@ -73,7 +74,8 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #48802c;
+    font-family:'Lobster Two',Arial,sans-serif;
+	color: #ed6b06;
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
@@ -94,6 +96,20 @@ img {
 	margin: 1em;
 }
 
+#logo {
+    margin-left: 20px;
+    margin-top: 50px;
+    float: left;
+}
+
+#create-session {
+    float: right;
+}
+
+#search {
+
+}
+
 .content {
 }
 
@@ -108,7 +124,7 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: #ed6b06;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -151,15 +167,19 @@ img {
 
 .nav li {
 	display: block;
-	float: left;
 	list-style-type: none;
 	margin-right: 0.5em;
 	padding: 0;
 }
 
+.nav fieldset{
+    display: block;
+}
+
 .nav a {
 	color: #666666;
 	display: block;
+    float: left;
 	padding: 0.25em 0.7em;
 	text-decoration: none;
 	   -moz-border-radius: 0.3em;
@@ -594,3 +614,12 @@ a.skip {
 	position: absolute;
 	left: -9999px;
 }
+
+img.avatar {
+    width: 6.0em;
+    height: 7.5em;
+}
+
+img.avatar_small { width: 4em; height: 5em; }
+
+img.avatar_tiny { width: 2em; height: 2.5em; }
