@@ -10,6 +10,26 @@ class UtilisateurController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def connect(){
+        def utilisateurInstance = Utilisateur.findByPseudoAndMotDePasse(params["pseudo"], params["motDePasse"])
+
+        if (utilisateurInstance) {
+            def session = request.getSession(true)
+            session.setAttribute("utilisateur", utilisateurInstance)
+
+            redirect(controller : "Utilisateur", action: "show", id: utilisateurInstance.id)
+        } else {
+            flash.message = message(code: 'default.invalid.connexion.message')
+            render(view : "/index")
+        }
+    }
+
+
+    def logout(){
+        session.invalidate()
+        redirect(uri: '/')
+    }
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Utilisateur.list(params), model:[utilisateurInstanceCount: Utilisateur.count()]
