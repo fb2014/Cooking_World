@@ -10,8 +10,8 @@ class UtilisateurControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        params["pseudo"] = 'unPseudo'
-        params["motDePasse"] = 'unMdp'
+        params["pseudo"] = 'Jean'
+        params["motDePasse"] = 'azerty'
     }
 
     void "Test the index action returns the correct model"() {
@@ -55,6 +55,41 @@ class UtilisateurControllerSpec extends Specification {
         response.redirectedUrl == '/utilisateur/show/1'
         controller.flash.message != null
         Utilisateur.count() == 1
+    }
+
+    void "Test that the connect action returns the correct user"(){
+        when: "The connect action is executed with a valid password"
+        populateValidParams(params)
+        def utilisateur = new Utilisateur(params).save(flush: true)
+        controller.connect()
+
+        then: "The correct user view is returned"
+        session.utilisateur == utilisateur
+        response.redirectedUrl == "/utilisateur/show/$utilisateur.id"
+        flash.message == null
+
+        when: "The connect action is executed with an invalid password"
+        response.reset()
+        params["pseudo"] = 'error'
+        params["motDePasse"] = 'azerty'
+        controller.connect()
+
+        then: "An error is returned"
+        flash.message != null
+
+    }
+
+    void "Test that the logout action erases session variables"(){
+        when: "A user is connected and the logout button is pressed"
+        params["pseudo"] = 'Michel'
+        params["motDePasse"] = 'azerty'
+        def utilisateur = new Utilisateur(params).save(flush: true)
+        session.utilisateur = utilisateur
+        controller.logout()
+
+        then: "The sessions vairables are erased"
+        session.utilisateur == null
+        response.redirectedUrl == '/'
     }
 
     void "Test that the show action returns the correct model"() {

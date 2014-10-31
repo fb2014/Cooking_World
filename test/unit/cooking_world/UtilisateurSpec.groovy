@@ -67,4 +67,15 @@ class UtilisateurSpec extends Specification {
         utilisateur.getCommentaire().size() == 1
     }
 
+    void "test toString() "() {
+        given: "un utilisateur"
+        utilisateur.pseudo = "unPseudo"
+        utilisateur.motDePasse = "unMotDePasse"
+
+        when: "on appel la fonction toString()"
+        def monUtilisateur = utilisateur.toString()
+
+        then: "on a bien le pseudo de l'utilisateur"
+        monUtilisateur == utilisateur.pseudo
+    }
 }
