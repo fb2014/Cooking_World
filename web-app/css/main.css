@@ -66,7 +66,7 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #000000;
+	/*color: #000000;*/
 }
 
 a:hover, a:active {
@@ -148,6 +148,20 @@ img {
 	text-indent: -9999px;
 }
 
+.login {
+    color: #ffffff;
+    font-size: 0.75em;
+    padding: 0;
+    text-decoration: none;
+    display: block;
+}
+
+.compte {
+    color: #ffffff;
+    padding: 0;
+    text-decoration: none;
+    display: block;
+}
 /* NAVIGATION MENU */
 
 .nav {
@@ -212,6 +226,10 @@ img {
 
 .nav a.home {
 	background-image: url(../images/skin/house.png);
+}
+
+.nav a.recette {
+    background-image: url(../images/skin/chapeau.png);
 }
 
 .nav a.list {
