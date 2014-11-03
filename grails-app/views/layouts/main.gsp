@@ -8,7 +8,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><g:layoutTitle default="Grails"/></title>
+    <title>Welcome to CookingWorld</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="${resource(dir: 'images', file: 'favicon.ico')}" type="image/x-icon">
     <link rel="apple-touch-icon" href="${resource(dir: 'images', file: 'apple-touch-icon.png')}">
@@ -30,16 +30,25 @@
         <g:if test="${session.utilisateur != null}">
             <g:form controller="Utilisateur" action="logout">
                 <div style="display:table-cell; padding-right: 50px">
-                <g:link controller="Utilisateur" action="show" id="${session.utilisateur.id}">Bonjour ${session.utilisateur.pseudo}</g:link>
+                <g:link class="compte" controller="Utilisateur" action="show" id="${session.utilisateur.id}">${session.utilisateur.pseudo}</g:link>
                 <g:submitButton name="logout" value="Log out"/></div>
             </g:form>
         </g:if>
         <g:else>
         <g:form controller="Utilisateur" action="connect">
             <fieldset class="form">
+                <div style="padding-left: 20px">
+                <div>
                 <div style="display:table-cell"><g:render template="/layouts/form"/></div>
                 <p style="display:table-cell; width:5px"></p>
                 <div style="display:table-cell"><g:submitButton name="connect" value="Login"/></div>
+                </div>
+                <div>
+                <g:link  style="display:table-cell" controller="Utilisateur" action="create" class="login">Créer un compte</g:link>
+                    <p style="display:table-cell; width:30px"></p>
+                <g:link style="display:table-cell" class="login">Mot de passe oublié</g:link>
+                </div>
+                </div>
             </fieldset>
         </g:form>
         </g:else>

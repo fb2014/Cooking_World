@@ -63,6 +63,7 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.7'
         compile ":heroku:1.0.1"
         compile ':cloud-support:1.0.8'
+        compile ":codenarc:0.22"
         //compile ":twitter-bootstrap:3.2.0.2"
 
 
