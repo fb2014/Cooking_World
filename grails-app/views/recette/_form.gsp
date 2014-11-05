@@ -16,6 +16,7 @@
         <g:message code="recette.photo.label" default="Photo"/>
 
     </label>
+
     <input type="file" id="photo" name="photo"/>
 
 </div>

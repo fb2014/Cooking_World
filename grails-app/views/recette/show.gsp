@@ -26,47 +26,35 @@
         <div class="message" role="status">${flash.message}</div>
     </g:if>
     <ol class="property-list recette">
+     <li class="fieldcontain">
+         <h2><g:fieldValue bean="${recetteInstance}" field="titre"/></h2>
+         <p>Posté par <g:link controller="utilisateur" action="show" id="${recetteInstance?.utilisateur?.id}">${recetteInstance?.utilisateur?.encodeAsHTML()}</g:link>
+         , le <g:formatDate format="dd-MM-yyyy" date="${recetteInstance?.dateCreation}"/>
+         </p>
+     </li>
+    <table><tr><td>
+        <!--  afficher la photo -->
+         <img align="left" src="${createLink(controller:'Recette', action:'showPayload', id:"${recetteInstance.id}")}" width="350" height="400" />
+          <!-- fin  -->
 
-        <g:if test="${recetteInstance?.titre}">
-            <li class="fieldcontain">
-                <span id="titre-label" class="property-label"><g:message code="recette.titre.label"
-                                                                         default="Titre"/></span>
 
-                <span class="property-value" aria-labelledby="titre-label"><g:fieldValue bean="${recetteInstance}"
-                                                                                         field="titre"/></span>
 
-            </li>
-        </g:if>
+        <li class="fieldcontain">
+               <span id="tempsPreparation-label" class="property-label"><g:message
+                       code="recette.tempsPreparation.label" default="Préparation"/></span>
 
-        <g:if test="${recetteInstance?.photo}">
-            <li class="fieldcontain">
-                <span id="photo-label" class="property-label"><g:message code="recette.photo.label"
-                                                                         default="Photo"/></span>
+               <span class="property-value" aria-labelledby="tempsPreparation-label"><g:fieldValue
+                       bean="${recetteInstance}" field="tempsPreparation"/></span>
+       </li>
 
-            </li>
-        </g:if>
-
-        <g:if test="${recetteInstance?.tempsPreparation}">
-            <li class="fieldcontain">
-                <span id="tempsPreparation-label" class="property-label"><g:message
-                        code="recette.tempsPreparation.label" default="Temps Preparation"/></span>
-
-                <span class="property-value" aria-labelledby="tempsPreparation-label"><g:fieldValue
-                        bean="${recetteInstance}" field="tempsPreparation"/></span>
-
-            </li>
-        </g:if>
-
-        <g:if test="${recetteInstance?.tempsCuisson}">
-            <li class="fieldcontain">
+        <li class="fieldcontain">
                 <span id="tempsCuisson-label" class="property-label"><g:message code="recette.tempsCuisson.label"
-                                                                                default="Temps Cuisson"/></span>
+                                                                                default="Cuisson"/></span>
 
                 <span class="property-value" aria-labelledby="tempsCuisson-label"><g:fieldValue
                         bean="${recetteInstance}" field="tempsCuisson"/></span>
+        </li>
 
-            </li>
-        </g:if>
 
         <g:if test="${recetteInstance?.ingredients}">
             <li class="fieldcontain">
@@ -77,69 +65,46 @@
                                                                                                field="ingredients"/></span>
 
             </li>
-        </g:if>
+        </g:if></td></tr>
+        <tr ><td >
+            <g:if test="${recetteInstance?.description}">
+                <li class="fieldcontain">
+                    <span id="description-label" class="property-label"><g:message code="recette.description.label"
+                                                                                   default="Description"/></span>
 
-        <g:if test="${recetteInstance?.description}">
-            <li class="fieldcontain">
-                <span id="description-label" class="property-label"><g:message code="recette.description.label"
-                                                                               default="Description"/></span>
+                    <span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${recetteInstance}"
+                                                                                                   field="description"/></span>
 
-                <span class="property-value" aria-labelledby="description-label"><g:fieldValue bean="${recetteInstance}"
-                                                                                               field="description"/></span>
+                </li>
+            </g:if>
+            <g:if test="${recetteInstance?.commentaire}">
+                <li class="fieldcontain">
+                    <span id="commentaire-label" class="property-label"><g:message code="recette.commentaire.label"
+                                                                                   default="Commentaire"/></span>
 
-            </li>
-        </g:if>
+                    <g:each in="${recetteInstance.commentaire}" var="c">
+                        <span class="property-value" aria-labelledby="commentaire-label"><g:link controller="commentaire"
+                                                                                                 action="show"
+                                                                                                 id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+                    </g:each>
 
-        <g:if test="${recetteInstance?.dateCreation}">
-            <li class="fieldcontain">
-                <span id="dateCreation-label" class="property-label"><g:message code="recette.dateCreation.label"
-                                                                                default="Date Creation"/></span>
+                </li>
+            </g:if>
 
-                <span class="property-value" aria-labelledby="dateCreation-label"><g:formatDate
-                        date="${recetteInstance?.dateCreation}"/></span>
+            <g:if test="${recetteInstance?.coupDeCoeur}">
+                <li class="fieldcontain">
+                    <span id="coupDeCoeur-label" class="property-label"><g:message code="recette.coupDeCoeur.label"
+                                                                                   default="Coup De Coeur"/></span>
 
-            </li>
-        </g:if>
+                    <g:each in="${recetteInstance.coupDeCoeur}" var="c">
+                        <span class="property-value" aria-labelledby="coupDeCoeur-label"><g:link controller="coupDeCoeur"
+                                                                                                 action="show"
+                                                                                                 id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+                    </g:each>
 
-        <g:if test="${recetteInstance?.utilisateur}">
-            <li class="fieldcontain">
-                <span id="utilisateur-label" class="property-label"><g:message code="recette.utilisateur.label"
-                                                                               default="Utilisateur"/></span>
+                </li>
+            </g:if>
 
-                <span class="property-value" aria-labelledby="utilisateur-label"><g:link controller="utilisateur"
-                                                                                         action="show"
-                                                                                         id="${recetteInstance?.utilisateur?.id}">${recetteInstance?.utilisateur?.encodeAsHTML()}</g:link></span>
-
-            </li>
-        </g:if>
-
-        <g:if test="${recetteInstance?.commentaire}">
-            <li class="fieldcontain">
-                <span id="commentaire-label" class="property-label"><g:message code="recette.commentaire.label"
-                                                                               default="Commentaire"/></span>
-
-                <g:each in="${recetteInstance.commentaire}" var="c">
-                    <span class="property-value" aria-labelledby="commentaire-label"><g:link controller="commentaire"
-                                                                                             action="show"
-                                                                                             id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-                </g:each>
-
-            </li>
-        </g:if>
-
-        <g:if test="${recetteInstance?.coupDeCoeur}">
-            <li class="fieldcontain">
-                <span id="coupDeCoeur-label" class="property-label"><g:message code="recette.coupDeCoeur.label"
-                                                                               default="Coup De Coeur"/></span>
-
-                <g:each in="${recetteInstance.coupDeCoeur}" var="c">
-                    <span class="property-value" aria-labelledby="coupDeCoeur-label"><g:link controller="coupDeCoeur"
-                                                                                             action="show"
-                                                                                             id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
-                </g:each>
-
-            </li>
-        </g:if>
 
         <g:if test="${recetteInstance?.notes}">
             <li class="fieldcontain">
@@ -152,9 +117,11 @@
                 </g:each>
 
             </li>
-        </g:if>
-
+        </g:if> </td></tr>
+        </table>
     </ol>
+
+
     <g:form url="[resource: recetteInstance, action: 'delete']" method="DELETE">
         <fieldset class="buttons">
             <g:link class="edit" action="edit" resource="${recetteInstance}"><g:message code="default.button.edit.label"

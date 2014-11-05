@@ -30,7 +30,9 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:form url="[resource: recetteInstance, action: 'save']" enctype="multipart/form-data">
+
+
+    <g:form url="[resource: recetteInstance, action: 'upload']" enctype="multipart/form-data">
         <fieldset class="form">
             <g:render template="form"/>
         </fieldset>

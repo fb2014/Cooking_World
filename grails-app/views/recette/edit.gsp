@@ -33,16 +33,18 @@
             </g:eachError>
         </ul>
     </g:hasErrors>
-    <g:form url="[resource: recetteInstance, action: 'update']" method="PUT" enctype="multipart/form-data">
-        <g:hiddenField name="version" value="${recetteInstance?.version}"/>
-        <fieldset class="form">
-            <g:render template="form"/>
-        </fieldset>
-        <fieldset class="buttons">
-            <g:actionSubmit class="save" action="update"
-                            value="${message(code: 'default.button.update.label', default: 'Update')}"/>
-        </fieldset>
+
+    <g:form url="[resource: recetteInstance, action: 'updateImg']" method="PUT" enctype="multipart/form-data">
+    <g:hiddenField name="version" value="${recetteInstance?.version}"/>
+    <fieldset class="form">
+        <g:render template="form"/>
+    </fieldset>
+    <fieldset class="buttons">
+        <g:actionSubmit class="save" action="updateImg"
+                        value="${message(code: 'default.button.update.label', default: 'Update')}"/>
+    </fieldset>
     </g:form>
+
 </div>
 </body>
 </html>

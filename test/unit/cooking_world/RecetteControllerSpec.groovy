@@ -10,15 +10,18 @@ class RecetteControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
+
         params["titre"] = 'untitre'
-        params["photo"] = null
+        params ["photo"] =[]
         params["ingredients"] = 'desingredients'
         params["description"] = 'unedescritpion'
         params["tempsPreparation"] = 2
         params["tempsCuisson"] = 2
-        params["dateCreation"] = new Date()
+        params["dateCreation"] = new Date('10/10/2010')
         params["fileName"] = 'fileName'
         params["utilisateur.id"] = 2
+
+
 
     }
 
@@ -56,7 +59,6 @@ class RecetteControllerSpec extends Specification {
         response.reset()
         populateValidParams(params)
         recette = new Recette(params)
-
         controller.save(recette)
 
         then: "A redirect is issued to the show action"

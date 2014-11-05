@@ -2,7 +2,7 @@ package cooking_world
 
 class Recette {
     String titre
-    Byte[] photo
+    byte[] photo
     String ingredients
     String description
     Integer tempsPreparation
@@ -14,7 +14,7 @@ class Recette {
 
     static constraints = {
         titre (nullable : false, blank : false)
-        photo (nullable : true,maxSize: 16384 /* 16K */)
+        photo (nullable : true,maxSize: 1024*1024*2 /*2MB*/)
         tempsPreparation(min : 0)
         tempsCuisson (min : 0)
         ingredients (widget:'textarea',nullable : false, blank : false)

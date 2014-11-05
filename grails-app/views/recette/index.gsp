@@ -53,8 +53,9 @@
                 <td><g:link action="show"
                             id="${recetteInstance.id}">${fieldValue(bean: recetteInstance, field: "titre")}</g:link></td>
 
-                <td>${fieldValue(bean: recetteInstance, field: "photo")}</td>
-
+                <!-- afficher la photo -->
+                <td> <img class="avatar_small" src="${createLink(controller:'Recette', action:'showPayload', id:"${recetteInstance.id}")}" /></td>
+                <!-- fin-->
                 <td>${fieldValue(bean: recetteInstance, field: "tempsPreparation")}</td>
 
                 <td>${fieldValue(bean: recetteInstance, field: "tempsCuisson")}</td>
