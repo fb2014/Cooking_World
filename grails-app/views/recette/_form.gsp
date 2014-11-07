@@ -56,16 +56,15 @@
     <g:textArea name="description" cols="40" rows="5" required="" value="${recetteInstance?.description}"/>
 
 </div>
-
-<div class="fieldcontain ${hasErrors(bean: recetteInstance, field: 'dateCreation', 'error')} required">
+%{--<div class="fieldcontain ${hasErrors(bean: recetteInstance, field: 'dateCreation', 'error')} required">
     <label for="dateCreation">
         <g:message code="recette.dateCreation.label" default="Date Creation"/>
         <span class="required-indicator">*</span>
     </label>
     <g:datePicker name="dateCreation" precision="day" value="${recetteInstance?.dateCreation}"/>
 
-</div>
-
+</div>--}%
+%{--
 <div class="fieldcontain ${hasErrors(bean: recetteInstance, field: 'utilisateur', 'error')} required">
     <label for="utilisateur">
         <g:message code="recette.utilisateur.label" default="Utilisateur"/>
@@ -75,7 +74,9 @@
               required="" value="${recetteInstance?.utilisateur?.id}" class="many-to-one"/>
 
 </div>
+--}%
 
+%{--
 <div class="fieldcontain ${hasErrors(bean: recetteInstance, field: 'commentaire', 'error')} ">
     <label for="commentaire">
         <g:message code="recette.commentaire.label" default="Commentaire"/>
@@ -93,8 +94,9 @@
     </ul>
 
 </div>
+--}%
 
-<div class="fieldcontain ${hasErrors(bean: recetteInstance, field: 'coupDeCoeur', 'error')} ">
+%{--<div class="fieldcontain ${hasErrors(bean: recetteInstance, field: 'coupDeCoeur', 'error')} ">
     <label for="coupDeCoeur">
         <g:message code="recette.coupDeCoeur.label" default="Coup De Coeur"/>
 
@@ -110,8 +112,8 @@
         </li>
     </ul>
 
-</div>
-
+</div>--}%
+%{--
 <div class="fieldcontain ${hasErrors(bean: recetteInstance, field: 'notes', 'error')} ">
     <label for="notes">
         <g:message code="recette.notes.label" default="Notes"/>
@@ -128,5 +130,5 @@
         </li>
     </ul>
 
-</div>
+</div>--}%
 

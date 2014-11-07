@@ -30,7 +30,26 @@
          <h2><g:fieldValue bean="${recetteInstance}" field="titre"/></h2>
          <p>Posté par <g:link controller="utilisateur" action="show" id="${recetteInstance?.utilisateur?.id}">${recetteInstance?.utilisateur?.encodeAsHTML()}</g:link>
          , le <g:formatDate format="dd-MM-yyyy" date="${recetteInstance?.dateCreation}"/>
+
          </p>
+        <g:if test="${recetteInstance?.coupDeCoeur}">
+            <li class="fieldcontain">
+                <span id="coupDeCoeur-label" class="property-label"><g:message code="recette.coupDeCoeur.label"
+                                                                               default="Coup De Coeur"/></span>
+
+                <g:each in="${recetteInstance.coupDeCoeur}" var="c">
+                    <span class="property-value" aria-labelledby="coupDeCoeur-label"><g:link controller="coupDeCoeur"
+                                                                                             action="show"
+                                                                                             id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+                </g:each>
+
+            </li>
+        </g:if>
+
+
+
+
+
      </li>
     <table><tr><td>
         <!--  afficher la photo -->
@@ -91,7 +110,7 @@
                 </li>
             </g:if>
 
-            <g:if test="${recetteInstance?.coupDeCoeur}">
+           %{-- <g:if test="${recetteInstance?.coupDeCoeur}">
                 <li class="fieldcontain">
                     <span id="coupDeCoeur-label" class="property-label"><g:message code="recette.coupDeCoeur.label"
                                                                                    default="Coup De Coeur"/></span>
@@ -103,7 +122,7 @@
                     </g:each>
 
                 </li>
-            </g:if>
+            </g:if>--}%
 
 
         <g:if test="${recetteInstance?.notes}">

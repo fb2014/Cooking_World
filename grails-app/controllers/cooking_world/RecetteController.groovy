@@ -120,12 +120,17 @@ class RecetteController {
      def upload(Recette  recetteInstance ){
 
          //recuperer le user connecté
-         //def currentUser=Utilisateur.get(session.utilisateur.id)
+         def currentUser=Utilisateur.get(session.utilisateur.id)
          // Get the avatar file
          def uploadedFile = request.getFile('photo')
 
-         //uploadImageService.uploadImage(currentUser.pseudo,uploadedFile,recetteInstance)
-         uploadImageService.uploadImage("marianetest",uploadedFile,recetteInstance)
+         uploadImageService.uploadImage(currentUser.pseudo,uploadedFile,recetteInstance)
+         //uploadImageService.uploadImage("marianetest",uploadedFile,recetteInstance)
+         //recuperer date courante
+         def currentDate=new Date()
+         recetteInstance.dateCreation=currentDate
+         recetteInstance.utilisateur=currentUser
+
          recetteInstance.save flush:true
 
 
