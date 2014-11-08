@@ -1,4 +1,5 @@
 <%@ page import="cooking_world.Recette" %>
+<%@ page import="cooking_world.Utilisateur" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +15,11 @@
 <div class="nav" role="navigation">
     <ul>
         <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+        <!-- afficher le bouton de creation de recette seuleument lorsqu'on est connecté -->
+        <% if (session['utilisateur']!=null){ %>
         <li><g:link class="create" action="create"><g:message code="default.new.label"
                                                               args="[entityName]"/></g:link></li>
+        <% } %>
     </ul>
 </div>
 

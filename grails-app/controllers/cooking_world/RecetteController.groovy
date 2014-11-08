@@ -11,8 +11,9 @@ import grails.transaction.Transactional
 class RecetteController {
 
     static allowedMethods = [save: "POST", update: ["PUT","POST"], delete: "DELETE"]
-    //static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
     UploadImageService uploadImageService
+    ApprecierRecetteService apprecierRecetteService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -121,12 +122,13 @@ class RecetteController {
 
          //recuperer le user connecté
          def currentUser=Utilisateur.get(session.utilisateur.id)
+
          // Get the avatar file
          def uploadedFile = request.getFile('photo')
 
          uploadImageService.uploadImage(currentUser.pseudo,uploadedFile,recetteInstance)
          //uploadImageService.uploadImage("marianetest",uploadedFile,recetteInstance)
-         //recuperer date courante
+         //recuperer la date courante et l'utilsateur courant
          def currentDate=new Date()
          recetteInstance.dateCreation=currentDate
          recetteInstance.utilisateur=currentUser
@@ -167,4 +169,56 @@ class RecetteController {
 
 
     }
+    //ajouter la note à la recette
+    def addNote(Recette  recetteInstance ){
+        def notegout=request.getParameter("gout").toInteger()
+        def noteclarte=request.getParameter("clarte").toInteger()
+        def notesimplicite=request.getParameter("simplicite").toInteger()
+
+        def currentUser
+        def userExist=session['utilisateur']
+        if (userExist==null){
+            currentUser=Utilisateur.findByPseudo('Anonyme')
+        }
+        else{
+            //recuperer le user connecté
+            currentUser=Utilisateur.get(session.utilisateur.id)
+
+        }
+        apprecierRecetteService.noterRecette(recetteInstance,currentUser,notegout,noteclarte,notesimplicite)
+
+        request.withFormat {
+            form multipartForm {
+                redirect recetteInstance
+            }
+            '*' { respond recetteInstance, [status: OK] }
+        }
+
+
+    }
+
+    //ajouter un coup de coeur à une recette
+    def addCoupDeCoeur(Recette recetteInstance){
+        if (!(request.getParameter("valImg")).equals("")) {//le user a eu un coup de coeur pour la recette
+
+            def currentUser
+            def userExist = session['utilisateur']
+            if (userExist == null) {
+                currentUser = Utilisateur.findByPseudo('Anonyme')
+            }
+            else {
+                //recuperer le user connecté
+                currentUser = Utilisateur.get(session.utilisateur.id)
+
+            }
+            apprecierRecetteService.donnerCoupdecoeur(recetteInstance, currentUser)
+        }
+        request.withFormat {
+            form multipartForm {
+                redirect recetteInstance
+            }
+            '*' { respond recetteInstance, [status: OK] }
+        }
+    }
+
 }
