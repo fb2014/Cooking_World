@@ -1,7 +1,7 @@
 package cooking_world
 
-
-
+@SuppressWarnings('GrailsMassAssignment')
+@SuppressWarnings('NoWildcardImports')
 import grails.test.mixin.*
 import spock.lang.*
 

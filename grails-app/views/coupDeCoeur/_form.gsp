@@ -20,12 +20,12 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: coupDeCoeurInstance, field: 'date', 'error')} required">
-	<label for="date">
-		<g:message code="coupDeCoeur.date.label" default="Date" />
+<div class="fieldcontain ${hasErrors(bean: coupDeCoeurInstance, field: 'dateCoupDeCoeur', 'error')} required">
+	<label for="dateCoupDeCoeur">
+		<g:message code="coupDeCoeur.dateCoupDeCoeur.label" default="Date" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:datePicker name="date" precision="day"  value="${coupDeCoeurInstance?.date}"  />
+	<g:datePicker name="dateCoupDeCoeur" precision="day"  value="${coupDeCoeurInstance?.dateCoupDeCoeur}"  />
 
 </div>
 

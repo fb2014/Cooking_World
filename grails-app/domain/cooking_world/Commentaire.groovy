@@ -1,5 +1,8 @@
 package cooking_world
 
+import groovy.transform.EqualsAndHashCode
+
+@EqualsAndHashCode
 class Commentaire {
 
     String message

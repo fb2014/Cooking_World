@@ -1,7 +1,8 @@
 package cooking_world
 
 
-
+@SuppressWarnings('NoWildcardImports')
+@SuppressWarnings('GrailsMassAssignment')
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 /* create et update en fonction du user connecté ok

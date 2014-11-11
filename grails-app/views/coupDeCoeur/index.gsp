@@ -28,7 +28,7 @@
 					
 						<th><g:message code="coupDeCoeur.recette.label" default="Recette" /></th>
 					
-						<g:sortableColumn property="date" title="${message(code: 'coupDeCoeur.date.label', default: 'Date')}" />
+						<g:sortableColumn property="dateCoupDeCoeur" title="${message(code: 'coupDeCoeur.dateCoupDeCoeur.label', default: 'Date')}" />
 					
 					</tr>
 				</thead>
@@ -40,7 +40,7 @@
 					
 						<td>${fieldValue(bean: coupDeCoeurInstance, field: "recette")}</td>
 					
-						<td><g:formatDate date="${coupDeCoeurInstance.date}" /></td>
+						<td><g:formatDate dateCoupDeCoeur="${coupDeCoeurInstance.dateCoupDeCoeur}" /></td>
 					
 					</tr>
 				</g:each>

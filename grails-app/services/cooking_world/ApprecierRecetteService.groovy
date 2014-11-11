@@ -14,7 +14,7 @@ class ApprecierRecetteService {
     }
 
     def donnerCoupdecoeur(Recette recetteInstance,Utilisateur user){
-        def cdc=new CoupDeCoeur(date:new Date())
+        def cdc=new CoupDeCoeur(dateCoupDeCoeur:new Date())
         recetteInstance.addToCoupDeCoeur(cdc)
         user.addToCoupDeCoeur(cdc)
         cdc.save(flush: true, failOnError: true)

@@ -18,13 +18,11 @@ class CoupDeCoeurSpec extends Specification {
         coupDeCoeur = new CoupDeCoeur()
     }
 
-    def cleanup() {
-    }
 
     @Unroll
     void "test sur les contraintes d'un coup de coeur valide"() {
         given: "un coup de coeur"
-        coupDeCoeur.date = uneDate
+        coupDeCoeur.dateCoupDeCoeur = uneDate
         coupDeCoeur.recette = uneRecette
         coupDeCoeur.utilisateur = unUtilisateur
 

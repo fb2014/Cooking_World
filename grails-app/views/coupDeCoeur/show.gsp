@@ -41,11 +41,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${coupDeCoeurInstance?.date}">
+				<g:if test="${coupDeCoeurInstance?.dateCoupDeCoeur}">
 				<li class="fieldcontain">
-					<span id="date-label" class="property-label"><g:message code="coupDeCoeur.date.label" default="Date" /></span>
+					<span id="dateCoupDeCoeur-label" class="property-label"><g:message code="coupDeCoeur.dateCoupDeCoeur.label" default="Date" /></span>
 					
-						<span class="property-value" aria-labelledby="date-label"><g:formatDate date="${coupDeCoeurInstance?.date}" /></span>
+						<span class="property-value" aria-labelledby="dateCoupDeCoeur-label"><g:formatDate dateCoupDeCoeur="${coupDeCoeurInstance?.dateCoupDeCoeur}" /></span>
 					
 				</li>
 				</g:if>

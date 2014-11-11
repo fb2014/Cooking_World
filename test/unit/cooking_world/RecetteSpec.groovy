@@ -21,8 +21,6 @@ class RecetteSpec extends Specification {
         mon_user=Mock(Utilisateur)
         mes_notes=Mock(Notes)
     }
-    def cleanup() {
-    }
 
     @Unroll
     void "test sur les contraintes d'une recette valide"() {

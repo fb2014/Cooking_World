@@ -1,5 +1,10 @@
 package cooking_world
 
+import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
+
+@EqualsAndHashCode
+@ToString
 class Notes {
 
     Integer clarte

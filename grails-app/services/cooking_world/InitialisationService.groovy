@@ -14,7 +14,6 @@ class InitialisationService {
         def utilisateurPaul = new Utilisateur(pseudo: "Paul",motDePasse: "jesuispaul").save(failOnError : true)
         def utilisateurAlice = new Utilisateur(pseudo: "Alice",motDePasse: "secret").save(failOnError : true)
         def utilisateurMarie = new Utilisateur(pseudo: "Marie",motDePasse: "tarteauxpommes").save(failOnError : true)
-        def anonyme = new Utilisateur(pseudo: "Anonyme",motDePasse: "seul").save(failOnError : true)
 
         def recetteCookies = new Recette(titre:"Cookies", ingredients: "chocolat, farine, sucre", description:"Mélanger les ingrédients", tempsCuisson: 10, tempsPreparation: 45, dateCreation: new Date("10/10/2014"))
         utilisateurAlice.addToRecette(recetteCookies).save(failOnError: true)
@@ -28,7 +27,7 @@ class InitialisationService {
         def recetteTartePommes = new Recette(titre:"Tarte aux pommes", ingredients: "beurre, sucre , pommes, pâte feuilletée", description:"Eplucher et couper les pommes; enfournez.", tempsCuisson: 30, tempsPreparation: 45, dateCreation: new Date())
         utilisateurMarie.addToRecette(recetteTartePommes).save(failOnError: true)
 
-        def coeurMarieMacaronPistache = new CoupDeCoeur(date: new Date())
+        def coeurMarieMacaronPistache = new CoupDeCoeur(dateCoupDeCoeur: new Date())
         utilisateurMarie.addToCoupDeCoeur(coeurMarieMacaronPistache)
         recetteMacaronsPistache.addToCoupDeCoeur(coeurMarieMacaronPistache).save(failOnError: true)
 

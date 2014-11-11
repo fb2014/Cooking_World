@@ -18,8 +18,6 @@ class CommentaireSpec extends Specification {
         commentaire = new Commentaire()
     }
 
-    def cleanup() {
-    }
 
     @Unroll
     void "test sur les contraintes d'un commentaire valide"() {

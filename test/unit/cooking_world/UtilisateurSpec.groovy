@@ -18,8 +18,6 @@ class UtilisateurSpec extends Specification {
         utilisateur = new Utilisateur()
     }
 
-    def cleanup() {
-    }
     @Unroll
     void "test sur les contraintes d'un utilisateur valide"() {
         given: "un utilisateur"

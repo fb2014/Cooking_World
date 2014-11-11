@@ -1,6 +1,7 @@
 package cooking_world
 
-
+@SuppressWarnings('GrailsMassAssignment')
+@SuppressWarnings('NoWildcardImports')
 import grails.test.mixin.*
 import spock.lang.*
 
@@ -10,7 +11,7 @@ class CoupDeCoeurControllerSpec extends Specification {
 
     def populateValidParams(params) {
         assert params != null
-        params["date"] = new Date()
+        params["dateCoupDeCoeur"] = new Date()
         params["utilisateur.id"] = 1
         params["recette.id"] = 1
     }
