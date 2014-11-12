@@ -29,25 +29,18 @@
         <g:if test="${utilisateurInstance?.coupDeCoeur}">
             <li class="fieldcontain">
                 <g:each in="${utilisateurInstance.coupDeCoeur}" var="c">
-                    <span class="property-value" aria-labelledby="coupDeCoeur-label"><g:link controller="coupDeCoeur"
-                                                                                             action="show"
-                                                                                             id="${c.id}">${c?.recette?.titre}</g:link></span>
+                    <g:render template="vignetteRecette" collection="${c.recette}" />
                 </g:each>
 
             </li>
         </g:if>
 
-
         <h1>Recettes postées</h1>
+
         <g:if test="${utilisateurInstance?.recette}">
             <li class="fieldcontain">
                 <g:each in="${utilisateurInstance.recette}" var="r">
-                    <span class="property-value" aria-labelledby="recette-label"><g:link controller="recette"
-                                                                                         action="show"
-                                                                                         id="${r.id}">${r?.titre}</g:link>
-                        <g:link
-                                controller="recette" class="edit" action="edit" id="${r.id}"><g:message
-                                code="default.button.edit.label" default="Edit"/></g:link><g:link controller="Recette" action="delete" id="${r.id}">Delete</g:link></span>
+                    <g:render template="vignetteRecette" collection="${r}" />
                 </g:each>
 
             </li>

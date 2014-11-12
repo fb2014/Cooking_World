@@ -240,6 +240,19 @@ img {
 	background-image: url(../images/skin/database_add.png);
 }
 
+.vignette {
+    border-color: #000000;
+    background-color: #EFEFEF;
+    border-radius: 5px 10px 0 5px;
+    min-height: 120px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+}
+
+.vignette a {
+    text-decoration: none;
+}
+
 /* CREATE/EDIT FORMS AND SHOW PAGES */
 
 fieldset,
