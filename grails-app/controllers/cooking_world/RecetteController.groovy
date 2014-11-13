@@ -103,7 +103,8 @@ class RecetteController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Recette.label', default: 'Recette'), recetteInstance.id])
-                redirect action:"index", method:"GET"
+                //redirect action:"index", method:"GET"
+                redirect(controller : "Utilisateur", action: "show", id: session.utilisateur.id)
             }
             '*'{ render status: NO_CONTENT }
         }
