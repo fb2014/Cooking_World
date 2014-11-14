@@ -42,4 +42,15 @@ class CommentaireSpec extends Specification {
 
 
     }
+
+    void "test toString() "() {
+        given: "un commentaire"
+        commentaire.message = "unCommentaire"
+
+        when: "on appel la fonction toString()"
+        def monCommentaire = commentaire.toString()
+
+        then: "on a bien le message du commentaire"
+        monCommentaire == commentaire.message
+    }
 }
