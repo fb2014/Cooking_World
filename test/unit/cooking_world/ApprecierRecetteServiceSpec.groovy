@@ -1,5 +1,6 @@
 package cooking_world
 
+import grails.test.mixin.Mock
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 
@@ -9,10 +10,8 @@ import spock.lang.Specification
 @TestFor(ApprecierRecetteService)
 class ApprecierRecetteServiceSpec extends Specification {
 
-    def setup() {
-    }
+    void "tests pas possible"() {
+        //DAO, voir le test d'intégration ApprecierRecetteServiceIntegrationSpec
 
-
-    void "test something"() {
     }
 }
