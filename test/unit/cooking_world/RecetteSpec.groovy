@@ -43,6 +43,7 @@ class RecetteSpec extends Specification {
         where:
         unTitre | unePhoto | desIngredients           | uneDesc       | unTpsPrepa | unTpsCuisson | uneDateCreation        | etatAttendu
         ""      | "photo"  | "ingredient, ingredient" | "description" | 10         | 15           | new Date('10/10/2010') | false
+        null    | "photo"  | "ingredient, ingredient" | "description" | 10         | 15           | new Date('10/10/2010') | false
         "Titre" | ""       | "ingredient, ingredient" | "description" | 10         | 15           | new Date('10/10/2010') | true
         "Titre" | "photo"  | ""                       | "description" | 10         | 15           | new Date('10/10/2010') | false
         "Titre" | "photo"  | "ingredient, ingredient" | ""            | 10         | 15           | new Date('10/10/2010') | false
@@ -52,39 +53,6 @@ class RecetteSpec extends Specification {
 
     }
 
-
-    @Unroll
-    void "test d'une recette avec toutes les informations necessaires"() {
-        given: "une recette complète"
-        recette.titre = unTitre
-        recette.filename = unePhoto
-        recette.ingredients = desIngredients
-        recette.description = uneDesc
-        recette.tempsPreparation = unTpsPrepa
-        recette.tempsCuisson = unTpsCuisson
-        recette.dateCreation = uneDateCreation
-
-        when: "la recette est entièrement validée"
-
-        def valid = ((recette.titre) && (recette.ingredients) && (recette.description) && (recette.tempsPreparation > 0)
-                && (recette.tempsCuisson > 0) && (recette.dateCreation))
-
-
-        then: "les vérifications de contraintes sont appliquées correctement"
-        valid == etatAttendu
-
-        where:
-        unTitre | unePhoto | desIngredients           | uneDesc       | unTpsPrepa | unTpsCuisson | uneDateCreation        | etatAttendu
-        ""      | "photo"  | "ingredient, ingredient" | "description" | 10         | 15           | new Date('10/10/2010') | false
-        "Titre" | ""       | "ingredient, ingredient" | "description" | 10         | 15           | new Date('10/10/2010') | true
-        "Titre" | "photo"  | ""                       | "description" | 10         | 15           | new Date('10/10/2010') | false
-        "Titre" | "photo"  | "ingredient, ingredient" | ""            | 10         | 15           | new Date('10/10/2010') | false
-        "Titre" | "photo"  | "ingredient, ingredient" | "description" | 0          | 15           | new Date('10/10/2010') | false
-        "Titre" | "photo"  | "ingredient, ingredient" | "description" | 10         | -1           | new Date('10/10/2010') | false
-        "Titre" | "photo"  | "ingredient, ingredient" | "description" | 10         | 15           | new Date('10/10/2010') | true
-        "Titre" | "photo"  | "ingredient, ingredient" | "description" | 10         | 15           | new Date('10/10/2010') | true
-
-    }
 
     void "test une recette avec une note"(){
         given:"une recette à noter"
@@ -116,4 +84,21 @@ class RecetteSpec extends Specification {
        recette.getCommentaire().size() == 1
     }
 
+    void "test toString() "() {
+        given: "une recette"
+        recette.titre = "ma recette"
+        recette.filename = "ma photo"
+        recette.ingredients = "mes ingredients"
+        recette.description = " description"
+        recette.tempsPreparation = 10
+        recette.tempsCuisson = 3
+        recette.dateCreation = new Date('10/10/2010')
+
+        when: "on appel la fonction toString()"
+        def maRecette = recette.toString()
+
+        then: "on a bien le toString attendu de la recette"
+        maRecette == recette.titre + "\n Temps de préparation : "+recette.tempsPreparation+ "\n Temps de cuisson : "+recette.tempsCuisson + "\n Ingrédients :" + recette.ingredients + "\n"+recette.description
+
+    }
 }
