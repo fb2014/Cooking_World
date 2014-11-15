@@ -17,7 +17,7 @@ class Recette {
 
     static constraints = {
         titre (nullable : false, blank : false)
-        photo (nullable : true,maxSize: 1024*1024*2 /*2MB*/)
+        photo (nullable : true,maxSize: 1073741824 /*1GB*/)
         tempsPreparation(min : 0)
         tempsCuisson (min : 0)
         ingredients (widget:'textarea',nullable : false, blank : false)

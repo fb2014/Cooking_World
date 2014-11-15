@@ -27,14 +27,15 @@
                 <% DecimalFormat df = new DecimalFormat("0.00"); %><!-- afficher la moyenne de chaque note deux chiffres apres la virgule -->
                 <% def totalGout = 0 %>
                 <% def totalClarte = 0 %>
-                <g:each in="${it.notes}" var="n">
+                <% def nbNote=Notes.findAllByRecette(it).size()  %>
+                <g:each in="${Notes.findAllByRecette(it)}" var="n">
                     <% totalSimplicite = totalSimplicite + n.simplicite %>
                     <% totalGout = totalGout + n.gout %>
                     <% totalClarte = totalClarte + n.clarte %>
                 </g:each>
-                Clarté : <%=df.format(totalClarte / it.notes.size())%>/5
-            &nbsp;&nbsp; Simplicité : <%=df.format(totalSimplicite / it.notes.size())%>/5
-            &nbsp;&nbsp; Gout :  <%=df.format(totalGout / it.notes.size())%>/5
+                Clarté : <%=df.format(totalClarte / nbNote)%>/5
+            &nbsp;&nbsp; Simplicité : <%=df.format(totalSimplicite /nbNote)%>/5
+            &nbsp;&nbsp; Gout :  <%=df.format(totalGout / nbNote)%>/5
             </g:if></p><g:if test="${it?.coupDeCoeur}"><p
             style="float:right; padding-right: 5px; font-size: 12px">${it.coupDeCoeur.size()}<img
                 src="${resource(dir: 'images', file: 'heart.png')}" width="13" height="13"/></p></g:if>

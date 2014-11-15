@@ -47,14 +47,15 @@
             <% DecimalFormat df = new DecimalFormat("0.00"); %><!-- afficher la moyenne de chaque note deux chiffres apres la virgule -->
                     <% def totalGout=0  %>
                     <% def totalClarte=0  %>
-                <g:each in="${recetteInstance.notes}" var="n" >
+                    <% def nbNote=Notes.findAllByRecette(recetteInstance).size()  %>
+                <g:each in="${Notes.findAllByRecette(recetteInstance)}" var="n" >
                     <% totalSimplicite = totalSimplicite + n.simplicite%>
                     <% totalGout = totalGout + n.gout%>
                     <% totalClarte = totalClarte + n.clarte%>
                 </g:each>
-            Clarté : <%=df.format(totalClarte/recetteInstance.notes.size())%>/5
-            &nbsp;&nbsp; Simplicité : <%=df.format(totalSimplicite/recetteInstance.notes.size()) %>/5
-            &nbsp;&nbsp; Gout :  <%=df.format(totalGout/recetteInstance.notes.size()) %>/5
+            Clarté : <%=df.format(totalClarte/ nbNote)%>/5
+            &nbsp;&nbsp; Simplicité : <%=df.format(totalSimplicite/ nbNote) %>/5
+            &nbsp;&nbsp; Gout :  <%=df.format(totalGout/ nbNote) %>/5
 
         </g:if>
 
@@ -131,7 +132,10 @@
                                  width="13" height="13"    /></a>
 
              &nbsp;&nbsp;
-            <a href="javascript:img()" >Je n'aime plus</a>
+
+             <a href="javascript:img()" >  <img  src="${resource(dir: 'images', file: 'heart_b.jpg')}"
+                                 width="13" height="13"    /></a>
+
                  &nbsp;&nbsp;    <input type="submit" name="validercdc" value="Ok" />
                  <input type="hidden" id="valImg" name="valImg" value="" />
              </g:form>

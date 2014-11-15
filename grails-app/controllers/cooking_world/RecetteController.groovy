@@ -5,9 +5,7 @@ package cooking_world
 @SuppressWarnings('GrailsMassAssignment')
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
-/* create et update en fonction du user connecté ok
-    supprimer toutes les lignes avec marianetest le moment venu
- */
+
 @Transactional(readOnly = true)
 class RecetteController {
 
@@ -92,10 +90,9 @@ class RecetteController {
         //supprimer la photo du repertoire
         if(!recetteInstance.filename.equals("default.jpg")) {
             //recuperer le user connecté
-            //def currentUser=Utilisateur.get(session.utilisateur.id)
+            def currentUser=Utilisateur.get(session.utilisateur.id)
             def webRootDir = servletContext.getRealPath("/")
-            File maphoto = new File(webRootDir, "/images/UsersImages/marianetest/" + recetteInstance.filename)
-            //File maphoto = new  File(webRootDir,"/images/UsersImages/"+currentUser.pseudo+"/"+recetteInstance.filename)
+            File maphoto = new  File(webRootDir,"/images/UsersImages/"+currentUser.pseudo+"/"+recetteInstance.filename)
             maphoto.delete()
         }
         recetteInstance.delete flush:true
@@ -103,7 +100,7 @@ class RecetteController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Recette.label', default: 'Recette'), recetteInstance.id])
-                //redirect action:"index", method:"GET"
+
                 redirect(controller : "Utilisateur", action: "show", id: session.utilisateur.id)
             }
             '*'{ render status: NO_CONTENT }
@@ -129,7 +126,7 @@ class RecetteController {
          def uploadedFile = request.getFile('photo')
 
          uploadImageService.uploadImage(currentUser.pseudo,uploadedFile,recetteInstance)
-         //uploadImageService.uploadImage("marianetest",uploadedFile,recetteInstance)
+
          //recuperer la date courante et l'utilsateur courant
          def currentDate=new Date()
          recetteInstance.dateCreation=currentDate
@@ -156,9 +153,9 @@ class RecetteController {
     def updateImg(Recette recetteInstance){
         def uploadedFile = request.getFile('photo')
         //recuperer le user connecté
-        //def currentUser=Utilisateur.get(session.utilisateur.id)
-        //uploadImageService.updateImage(currentUser.pseudo,uploadedFile,recetteInstance)
-        uploadImageService.updateImage("marianetest",uploadedFile,recetteInstance)
+        def currentUser=Utilisateur.get(session.utilisateur.id)
+        uploadImageService.updateImage(currentUser.pseudo,uploadedFile,recetteInstance)
+
         recetteInstance.save flush:true
 
         request.withFormat {
@@ -177,18 +174,36 @@ class RecetteController {
         def noteclarte=request.getParameter("clarte").toInteger()
         def notesimplicite=request.getParameter("simplicite").toInteger()
 
-        def currentUser
         def userExist=session['utilisateur']
         if (userExist==null){
-            currentUser=Utilisateur.findByPseudo('Anonyme')
+            request.withFormat {
+                form multipartForm {
+                    flash.message = message(code: 'Vous devez vous connecter pour noter cette recette', args: [message(code: 'Recette.label', default: 'Recette'), recetteInstance.id])
+
+                }
+
+            }
         }
-        else{
+        else {
+
             //recuperer le user connecté
-            currentUser=Utilisateur.get(session.utilisateur.id)
+            def currentUser = Utilisateur.get(session.utilisateur.id)
+            if (currentUser.notes.size() == 0) {
+                apprecierRecetteService.noterRecette(recetteInstance, currentUser, notegout, noteclarte, notesimplicite)
+            } else {
+                if (recetteInstance in currentUser.notes.recette) {
+                    request.withFormat {
+                        form multipartForm {
+                            flash.message = message(code: 'Vous avez déja noté cette recette', args: [message(code: 'Recette.label', default: 'Recette'), recetteInstance.id])
 
+                        }
+
+                    }
+                } else {
+                    apprecierRecetteService.noterRecette(recetteInstance, currentUser, notegout, noteclarte, notesimplicite)
+                }
+            }
         }
-        apprecierRecetteService.noterRecette(recetteInstance,currentUser,notegout,noteclarte,notesimplicite)
-
         request.withFormat {
             form multipartForm {
                 redirect recetteInstance
@@ -203,17 +218,31 @@ class RecetteController {
     def addCoupDeCoeur(Recette recetteInstance){
         if (!(request.getParameter("valImg")).equals("")) {//le user a eu un coup de coeur pour la recette
 
-            def currentUser
             def userExist = session['utilisateur']
             if (userExist == null) {
-                currentUser = Utilisateur.findByPseudo('Anonyme')
-            }
-            else {
-                //recuperer le user connecté
-                currentUser = Utilisateur.get(session.utilisateur.id)
+                request.withFormat {
+                    form multipartForm {
+                        flash.message = message(code: 'Vous devez vous connecter pour attribuer un coup de coeur à cette recette', args: [message(code: 'Recette.label', default: 'Recette'), recetteInstance.id])
 
+                    }
+
+                }
+            } else {
+
+
+                def currentUser = Utilisateur.get(session.utilisateur.id)
+                if (recetteInstance in currentUser.coupDeCoeur.recette) {
+                    request.withFormat {
+                        form multipartForm {
+                            flash.message = message(code: 'Vous avez déja eu un coup de coeur pour cette recette', args: [message(code: 'Recette.label', default: 'Recette'), recetteInstance.id])
+
+                        }
+
+                    }
+                } else {
+                    apprecierRecetteService.donnerCoupdecoeur(recetteInstance, currentUser)
+                }
             }
-            apprecierRecetteService.donnerCoupdecoeur(recetteInstance, currentUser)
         }
         request.withFormat {
             form multipartForm {
