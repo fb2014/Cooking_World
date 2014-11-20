@@ -191,7 +191,8 @@ class RecetteController {
             if (currentUser.notes.size() == 0) {
                 apprecierRecetteService.noterRecette(recetteInstance, currentUser, notegout, noteclarte, notesimplicite)
             } else {
-                if (recetteInstance in currentUser.notes.recette) {
+
+                if (currentUser in Notes.findAllByRecette(recetteInstance).utilisateur) {
                     request.withFormat {
                         form multipartForm {
                             flash.message = message(code: 'Vous avez déja noté cette recette', args: [message(code: 'Recette.label', default: 'Recette'), recetteInstance.id])
