@@ -5,6 +5,7 @@ package cooking_world
 @SuppressWarnings('GrailsMassAssignment')
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 @Transactional(readOnly = true)
 class RecetteController {

@@ -1,17 +1,18 @@
 package cooking_world
 
 import grails.transaction.Transactional
-import org.codehaus.groovy.grails.web.context.ServletContextHolder
-import org.springframework.web.multipart.commons.CommonsMultipartFile
+import org.springframework.web.multipart.MultipartFile
 
 @Transactional
 class UploadImageService {
-    def servletContext = ServletContextHolder.servletContext
 
-    def uploadImage(String pseudoUser, CommonsMultipartFile uploadedFile,Recette recetteInstance) {
+    def uploadImage(String pseudoUser, MultipartFile uploadedFile,Recette recetteInstance) {
         // Save l'image dans le repertoire dédié à l'utilisateur courant
 
-        def storagePath = servletContext.getRealPath("/images/UsersImages/"+pseudoUser)
+        def val =getClass().getResource("/").toString()+"web-app/images/UsersImages/"+pseudoUser
+        def val1=val.replaceFirst("/","")
+        def val2 =val1.replace("/","\\")
+        def storagePath=val2.replace("file:","")
 
         def userDir = new File(storagePath )
         userDir.mkdirs()
@@ -22,7 +23,12 @@ class UploadImageService {
 
         }
         else{ //mettre une image par default
-            def storagePathDefault = servletContext.getRealPath("/images/default.jpg")
+
+            def autre =getClass().getResource("/").toString()+"web-app/images/default.jpg"
+            def autre1=autre.replaceFirst("/","")
+            def autre2 =autre1.replace("/","\\")
+            def storagePathDefault=autre2.replace("file:","")
+
             File defaultfile = new  File(storagePathDefault)
             recetteInstance.filename ="default.jpg"
             recetteInstance.photo = defaultfile.bytes
@@ -30,13 +36,17 @@ class UploadImageService {
 
     }
 
-    def updateImage(String pseudoUser, CommonsMultipartFile uploadedFile,Recette recetteInstance) {
+    def updateImage(String pseudoUser, MultipartFile uploadedFile,Recette recetteInstance) {
 
         if (!uploadedFile.empty){//update avec modification de la photo
 
             // Save l'image dans le repertoire dédié à l'utilisateur courant
 
-            def storagePath = servletContext.getRealPath("/images/UsersImages/"+pseudoUser)
+            def val =getClass().getResource("/").toString()+"web-app/images/UsersImages/"+pseudoUser
+            def val1=val.replaceFirst("/","")
+            def val2 =val1.replace("/","\\")
+            def storagePath=val2.replace("file:","")
+
 
             def userDir = new File(storagePath )
             userDir.mkdirs()
@@ -52,12 +62,22 @@ class UploadImageService {
              alors la récupérer et la garder
              */
             if (!(recetteInstance.filename.equals("default.jpg"))){
-                def storagePath2 = servletContext.getRealPath("/images/UsersImages/"+pseudoUser+"/"+recetteInstance.filename)
+
+                def val =getClass().getResource("/").toString()+"web-app/images/UsersImages/"+pseudoUser+"/"+recetteInstance.filename
+                def val1=val.replaceFirst("/","")
+                def val2 =val1.replace("/","\\")
+                def storagePath2=val2.replace("file:","")
+
                 File maphoto= new  File(storagePath2)
                 recetteInstance.photo = maphoto.bytes
              }
             else{
-                def storagePathDefault2 = servletContext.getRealPath("/images/default.jpg")
+
+                def autre =getClass().getResource("/").toString()+"web-app/images/default.jpg"
+                def autre1=autre.replaceFirst("/","")
+                def autre2 =autre1.replace("/","\\")
+                def storagePathDefault2=autre2.replace("file:","")
+
                 File maphoto2 = new  File(storagePathDefault2)
                 recetteInstance.photo = maphoto2.bytes
 
