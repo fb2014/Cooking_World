@@ -1,6 +1,5 @@
 package cooking_world
 
-import junit.framework.TestCase
 import spock.lang.Specification
 
 /**

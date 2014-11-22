@@ -6,7 +6,7 @@ import grails.test.mixin.*
 import spock.lang.*
 
 @TestFor(RecetteController)
-@Mock(Recette)
+@Mock([Recette,Utilisateur])
 class RecetteControllerSpec extends Specification {
 
     def populateValidParams(params) {
@@ -147,14 +147,20 @@ class RecetteControllerSpec extends Specification {
 
         then: "It exists"
         Recette.count() == 1
-        /*
+
         when: "The domain instance is passed to the delete action"
+        Utilisateur user = Mock(Utilisateur)
+        user.pseudo = 'Jean'
+        def session = request.getSession(true)
+        session.setAttribute("utilisateur", user)
+
         controller.delete(recette)
 
         then: "The instance is deleted"
         Recette.count() == 0
         //response.redirectedUrl == '/recette/index'
         flash.message != null
-        */
+
     }
+
 }

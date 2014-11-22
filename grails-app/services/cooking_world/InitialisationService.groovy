@@ -5,8 +5,6 @@ import grails.transaction.Transactional
 @Transactional
 class InitialisationService {
 
-    boolean transactionnal = true
-
     def initialiserDonnees() {
 
         def utilisateurJean = new Utilisateur(pseudo: "Jean",motDePasse: "azerty").save(failOnError : true)

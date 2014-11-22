@@ -5,7 +5,6 @@ package cooking_world
 @SuppressWarnings('GrailsMassAssignment')
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
-import org.springframework.web.multipart.commons.CommonsMultipartFile
 
 @Transactional(readOnly = true)
 class RecetteController {
@@ -90,10 +89,8 @@ class RecetteController {
 
         //supprimer la photo du repertoire
         if(!recetteInstance.filename.equals("default.jpg")) {
-            //recuperer le user connecté
-            def currentUser=Utilisateur.get(session.utilisateur.id)
             def webRootDir = servletContext.getRealPath("/")
-            File maphoto = new  File(webRootDir,"/images/UsersImages/"+currentUser.pseudo+"/"+recetteInstance.filename)
+            File maphoto = new  File(webRootDir,"/images/UsersImages/"+session.utilisateur.pseudo+"/"+recetteInstance.filename)
             maphoto.delete()
         }
         recetteInstance.delete flush:true
@@ -101,7 +98,7 @@ class RecetteController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Recette.label', default: 'Recette'), recetteInstance.id])
-
+                //redirect action:"index", method:"GET"
                 redirect(controller : "Utilisateur", action: "show", id: session.utilisateur.id)
             }
             '*'{ render status: NO_CONTENT }
