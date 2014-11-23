@@ -251,4 +251,29 @@ class RecetteController {
         }
     }
 
+    //Ajouter un commentaire à une recette
+    def addCommentaire(Recette recetteInstance){
+
+        def monCommentaire=request.getParameter("monCommentaire").toString()
+
+        def currentUser
+        def userExist=session['utilisateur']
+        if (userExist==null){
+            currentUser=Utilisateur.findByPseudo('Anonyme')
+        }
+        else{
+            //recuperer le user connecté
+            currentUser=Utilisateur.get(session.utilisateur.id)
+
+        }
+        apprecierRecetteService.commenterRecette(recetteInstance,currentUser,monCommentaire)
+
+        request.withFormat {
+            form multipartForm {
+                redirect recetteInstance
+            }
+            '*' { respond recetteInstance, [status: OK] }
+        }
+    }
+
 }
