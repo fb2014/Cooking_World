@@ -254,7 +254,7 @@ class RecetteController {
     //Ajouter un commentaire à une recette
     def addCommentaire(Recette recetteInstance){
 
-        def monCommentaire=request.getParameter("monCommentaire").toString()
+        def commentaire=request.getParameter("monCommentaire").toString()
 
         def currentUser
         def userExist=session['utilisateur']
@@ -266,7 +266,7 @@ class RecetteController {
             currentUser=Utilisateur.get(session.utilisateur.id)
 
         }
-        apprecierRecetteService.commenterRecette(recetteInstance,currentUser,monCommentaire)
+        apprecierRecetteService.commenterRecette(recetteInstance,currentUser,commentaire)
 
         request.withFormat {
             form multipartForm {

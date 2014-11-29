@@ -169,7 +169,7 @@
                 <span  class="property-label"> Mon commentaire : </span>
                 <g:form url="[resource: recetteInstance, action: 'addCommentaire']" method="post">
                     <g:textArea id="monCommentaire" name="monCommentaire"/>
-                    <input type="submit" name="validerCommentaire" value="Commenter" />
+                    <input type="submit" name="validerCommentaire" value="Publier" />
                 </g:form>
             </li>
         <!--fin traitement ajout de commentaire-->
