@@ -3,6 +3,7 @@ package cooking_world
 
 @SuppressWarnings('NoWildcardImports')
 @SuppressWarnings('GrailsMassAssignment')
+@SuppressWarnings('GrailsServletContextReference')
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -16,7 +17,7 @@ class RecetteController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Recette.list(params), model:[recetteInstanceCount: Recette.count()]
+       respond Recette.list(params), model:[recetteInstanceCount: Recette.count()]
     }
 
     def show(Recette recetteInstance) {
@@ -123,7 +124,7 @@ class RecetteController {
          // Get the avatar file
          def uploadedFile = request.getFile('photo')
 
-         uploadImageService.uploadImage(currentUser.pseudo,uploadedFile,recetteInstance)
+         uploadImageService.uploadImage(session.utilisateur.pseudo,uploadedFile,recetteInstance)
 
          //recuperer la date courante et l'utilsateur courant
          def currentDate=new Date()
@@ -150,9 +151,7 @@ class RecetteController {
 
     def updateImg(Recette recetteInstance){
         def uploadedFile = request.getFile('photo')
-        //recuperer le user connecté
-        def currentUser=Utilisateur.get(session.utilisateur.id)
-        uploadImageService.updateImage(currentUser.pseudo,uploadedFile,recetteInstance)
+        uploadImageService.updateImage(session.utilisateur.pseudo,uploadedFile,recetteInstance)
 
         recetteInstance.save flush:true
 
@@ -186,7 +185,7 @@ class RecetteController {
 
             //recuperer le user connecté
             def currentUser = Utilisateur.get(session.utilisateur.id)
-            if (currentUser.notes.size() == 0) {
+            if (currentUser.getNotes().size() == 0) {
                 apprecierRecetteService.noterRecette(recetteInstance, currentUser, notegout, noteclarte, notesimplicite)
             } else {
 
@@ -230,7 +229,7 @@ class RecetteController {
 
 
                 def currentUser = Utilisateur.get(session.utilisateur.id)
-                if (recetteInstance in currentUser.coupDeCoeur.recette) {
+                if (recetteInstance in currentUser.getCoupDeCoeur().recette) {
                     request.withFormat {
                         form multipartForm {
                             flash.message = message(code: 'Vous avez déja eu un coup de coeur pour cette recette', args: [message(code: 'Recette.label', default: 'Recette'), recetteInstance.id])
@@ -250,5 +249,4 @@ class RecetteController {
             '*' { respond recetteInstance, [status: OK] }
         }
     }
-
 }
