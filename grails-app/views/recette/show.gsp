@@ -164,6 +164,15 @@
         <!-- fin gestion changement etat coup de coeur -->
 
 
+        <!--Ajouter un commentaire -->
+            <li class="fieldcontain">
+                <span  class="property-label"> Mon commentaire : </span>
+                <g:form url="[resource: recetteInstance, action: 'addCommentaire']" method="post">
+                    <g:textArea id="monCommentaire" name="monCommentaire"/>
+                    <input type="submit" name="validerCommentaire" value="Publier" />
+                </g:form>
+            </li>
+        <!--fin traitement ajout de commentaire-->
 
             <g:if test="${recetteInstance?.commentaire}">
                 <li class="fieldcontain">
