@@ -249,7 +249,10 @@ class RecetteController {
             '*' { respond recetteInstance, [status: OK] }
         }
     }
-
+    def search() {
+        def results = Recette.findAllByTitreLike("%"+request.getParameter("tf_titre")+"%")
+        [recetteInstanceList:results]
+    }
     def sort() {
         def results
         if(request.getParameter("tri") == "Titre") {

@@ -19,6 +19,8 @@
         <g:if test="${session.utilisateur != null}"> <g:actionSubmit controller="recette" class="create" value="Créer une recette" action="create" /></g:if>
         <g:select name="tri" from="${['Date', 'Durée', 'Titre']}" />
         <g:actionSubmit controller="recette" class="sort" action="sort" value="Trier"/>
+        <g:textField name="tf_titre" placeholder="Recette" />
+        <g:actionSubmit controller="recette" class="search" action="search" value="Rechercher"/>
         </fieldset>
     </g:form>
 </div>
