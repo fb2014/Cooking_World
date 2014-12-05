@@ -249,4 +249,18 @@ class RecetteController {
             '*' { respond recetteInstance, [status: OK] }
         }
     }
+
+    def sort() {
+        def results
+        if(request.getParameter("tri") == "Titre") {
+            results = Recette.list(sort: "titre")
+        }
+        else if(request.getParameter("tri") == "Date") {
+            results = Recette.list(sort: "dateCreation")
+        }
+        else if(request.getParameter("tri") == "Durée") {
+            results = Recette.list(sort: "tempsPreparation")
+        }
+        [recetteInstanceList:results]
+    }
 }

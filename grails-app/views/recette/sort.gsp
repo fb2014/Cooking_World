@@ -14,11 +14,11 @@
 <h1><g:message code="Top des recettes" args="[entityName]"/></h1>
 
 <div style="display:table-cell;padding-left: 284px">
-     <g:form url="[resource: it, action: 'sort']" method="DELETE">
+    <g:form url="[resource: it, action: 'sort']" method="DELETE">
         <fieldset>
-        <g:if test="${session.utilisateur != null}"> <g:actionSubmit controller="recette" class="create" value="Créer une recette" action="create" /></g:if>
-        <g:select name="tri" from="${['Date', 'Durée', 'Titre']}" />
-        <g:actionSubmit controller="recette" class="sort" action="sort" value="Trier"/>
+            <g:if test="${session.utilisateur != null}"> <g:actionSubmit controller="recette" class="create" value="Créer une recette" action="create" /></g:if>
+            <g:select name="tri" from="${['Date', 'Durée', 'Titre']}" />
+            <g:actionSubmit controller="recette" class="sort" action="sort" value="Trier"/>
         </fieldset>
     </g:form>
 </div>
