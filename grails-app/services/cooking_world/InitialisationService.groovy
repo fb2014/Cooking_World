@@ -13,37 +13,33 @@ class InitialisationService {
         def utilisateurMarie = new Utilisateur(pseudo: "Marie",motDePasse: "tarteauxpommes").save(failOnError : true)
 
         def recetteCookies = new Recette(titre:"Cookies", ingredients: "chocolat, farine, sucre", description:"Mélanger les ingrédients", tempsCuisson: 10, tempsPreparation: 45, dateCreation: new Date("10/10/2014"), filename : "cookie.jpg")
-        def lien01 =getClass().getResource("/").toString()+"web-app/images/cookie.jpg"
-        def lien1=lien01.replaceFirst("/","")
-        def lien11 =lien1.replace("/","\\")
-        def storagePathDefault1=lien11.replace("file:","")
+        def lien01 =getClass().getResource("/").toString()+"web-app/images/UsersImages/Alice/cookie.jpg"
+
+        def storagePathDefault1=lien01.replace("file:","")
         File maphoto1 = new  File(storagePathDefault1)
         recetteCookies.photo = maphoto1.bytes
         utilisateurAlice.addToRecette(recetteCookies).save(failOnError: true)
 
         def recetteMacaronsPistache = new Recette(titre:"Macarons à la pistache", ingredients: "poudre d'amende, sucre glace, blanc d'oeuf, pâte à pistache, chocolat blanc", description:"Faire les coques, faire la ganache, assembler.", tempsCuisson: 12, tempsPreparation: 60, dateCreation: new Date(), filename : "pistache.jpg")
-        def lien02 =getClass().getResource("/").toString()+"web-app/images/pistache.jpg"
-        def lien2=lien02.replaceFirst("/","")
-        def lien22 =lien2.replace("/","\\")
-        def storagePathDefault2=lien22.replace("file:","")
+        def lien02 =getClass().getResource("/").toString()+"web-app/images/UsersImages/Alice/pistache.jpg"
+
+        def storagePathDefault2=lien02.replace("file:","")
         File maphoto2 = new  File(storagePathDefault2)
         recetteMacaronsPistache.photo = maphoto2.bytes
         utilisateurAlice.addToRecette(recetteMacaronsPistache).save(failOnError: true)
 
         def recetteMacaronsChocolat = new Recette(titre:"Macarons au chocolat", ingredients: "poudre d'amende, sucre glace, blanc d'oeuf, poudre cacao, chocolat noir", description:"Faire les coques, faire la ganache, assembler.", tempsCuisson: 12, tempsPreparation: 60, dateCreation: new Date(), filename : "choco.jpg")
-        def lien03 =getClass().getResource("/").toString()+"web-app/images/choco.jpg"
-        def lien3=lien03.replaceFirst("/","")
-        def lien33 =lien3.replace("/","\\")
-        def storagePathDefault3=lien33.replace("file:","")
+        def lien03 =getClass().getResource("/").toString()+"web-app/images/UsersImages/Jean/choco.jpg"
+
+        def storagePathDefault3=lien03.replace("file:","")
         File maphoto3 = new  File(storagePathDefault3)
         recetteMacaronsChocolat.photo = maphoto3.bytes
         utilisateurJean.addToRecette(recetteMacaronsChocolat).save(failOnError: true)
 
         def recetteTartePommes = new Recette(titre:"Tarte aux pommes", ingredients: "beurre, sucre , pommes, pâte feuilletée", description:"Eplucher et couper les pommes; enfournez.", tempsCuisson: 30, tempsPreparation: 45, dateCreation: new Date(), filename : "tarte.jpg")
-        def lien04 =getClass().getResource("/").toString()+"web-app/images/tarte.jpg"
-        def lien4=lien04.replaceFirst("/","")
-        def lien44 =lien4.replace("/","\\")
-        def storagePathDefault4=lien44.replace("file:","")
+        def lien04 =getClass().getResource("/").toString()+"web-app/images/UsersImages/Marie/tarte.jpg"
+
+        def storagePathDefault4=lien04.replace("file:","")
         File maphoto4 = new  File(storagePathDefault4)
         recetteTartePommes.photo = maphoto4.bytes
         utilisateurMarie.addToRecette(recetteTartePommes).save(failOnError: true)
