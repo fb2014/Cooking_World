@@ -3,6 +3,7 @@ package cooking_world
 
 @SuppressWarnings('NoWildcardImports')
 @SuppressWarnings('GrailsMassAssignment')
+@SuppressWarnings('GrailsServletContextReference')
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -16,7 +17,7 @@ class RecetteController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Recette.list(params), model:[recetteInstanceCount: Recette.count()]
+       respond Recette.list(params), model:[recetteInstanceCount: Recette.count()]
     }
 
     def show(Recette recetteInstance) {
@@ -132,6 +133,7 @@ class RecetteController {
 
          recetteInstance.save flush:true
 
+
          request.withFormat {
              form multipartForm {
                  flash.message = message(code: 'default.created.message', args: [message(code: 'recette.label', default: 'Recette'), recetteInstance.id])
@@ -149,8 +151,6 @@ class RecetteController {
 
     def updateImg(Recette recetteInstance){
         def uploadedFile = request.getFile('photo')
-        //recuperer le user connecté
-        def currentUser=Utilisateur.get(session.utilisateur.id)
         uploadImageService.updateImage(session.utilisateur.pseudo,uploadedFile,recetteInstance)
 
         recetteInstance.save flush:true
@@ -185,7 +185,6 @@ class RecetteController {
 
             //recuperer le user connecté
             def currentUser = Utilisateur.get(session.utilisateur.id)
-
             if (currentUser.getNotes().size() == 0) {
                 apprecierRecetteService.noterRecette(recetteInstance, currentUser, notegout, noteclarte, notesimplicite)
             } else {
@@ -230,7 +229,6 @@ class RecetteController {
 
 
                 def currentUser = Utilisateur.get(session.utilisateur.id)
-
                 if (recetteInstance in currentUser.getCoupDeCoeur().recette) {
                     request.withFormat {
                         form multipartForm {
@@ -251,5 +249,21 @@ class RecetteController {
             '*' { respond recetteInstance, [status: OK] }
         }
     }
-
+    def search() {
+        def results = Recette.findAllByTitreLike("%"+request.getParameter("tf_titre")+"%")
+        [recetteInstanceList:results]
+    }
+    def sort() {
+        def results
+        if(request.getParameter("tri") == "Titre") {
+            results = Recette.list(sort: "titre")
+        }
+        else if(request.getParameter("tri") == "Date") {
+            results = Recette.list(sort: "dateCreation")
+        }
+        else if(request.getParameter("tri") == "Durée") {
+            results = Recette.list(sort: "tempsPreparation")
+        }
+        [recetteInstanceList:results]
+    }
 }

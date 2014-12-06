@@ -3,16 +3,15 @@ package cooking_world
 @SuppressWarnings('GrailsMassAssignment')
 @SuppressWarnings('NoWildcardImports')
 import grails.test.mixin.*
+import spock.lang.*
 import org.codehaus.groovy.grails.plugins.testing.GrailsMockMultipartFile
 
-import spock.lang.*
 
 @TestFor(RecetteController)
 @Mock([Recette,Utilisateur,Notes,CoupDeCoeur])
 class RecetteControllerSpec extends Specification {
     UploadImageService myServiceUploadImg=Mock(UploadImageService)
     ApprecierRecetteService apprecierRecetteService=Mock(ApprecierRecetteService)
-
     def populateValidParams(params) {
         assert params != null
 
@@ -162,13 +161,13 @@ class RecetteControllerSpec extends Specification {
 
         then: "The instance is deleted"
         Recette.count() == 0
-        //response.redirectedUrl == '/recette/index'
         flash.message != null
 
     }
+
     def "test qu'on  a bien une image associée à la recette quand on fait appel à la fonction upload"(){
 
-       given:"une recette"
+        given:"une recette"
 
         populateValidParams(params)
         def recette = new Recette(params)
@@ -176,18 +175,18 @@ class RecetteControllerSpec extends Specification {
         recette.utilisateur.id=2
         recette.save()
 
-       def fileContentType =  "image/jpeg"
-       def fileContentBytes = '123' as byte[]
-       def file = new GrailsMockMultipartFile('photo', 'originalName.jpg', fileContentType, fileContentBytes)
-       request.addFile file
+        def fileContentType =  "image/jpeg"
+        def fileContentBytes = '123' as byte[]
+        def file = new GrailsMockMultipartFile('photo', 'originalName.jpg', fileContentType, fileContentBytes)
+        request.addFile file
 
         def session = request.getSession(true)
         session.setAttribute("utilisateur",recette.utilisateur)
 
-      controller.uploadImageService=myServiceUploadImg
+        controller.uploadImageService=myServiceUploadImg
 
-       when:"on enregistre la recette"
-         controller.upload(recette)
+        when:"on enregistre la recette"
+        controller.upload(recette)
 
 
         then:"on fait appel à la fonction uploadImage du service UploadImageService pour associer une image à la recette"
@@ -196,7 +195,6 @@ class RecetteControllerSpec extends Specification {
         1 *myServiceUploadImg.uploadImage("Marc",file,recette)
 
     }
-
     def "test que l'image associée à la recette est mise à jour quand on fait appel à la fonction updateImg"(){
 
         given:"une recette"
@@ -225,57 +223,6 @@ class RecetteControllerSpec extends Specification {
         response.redirectedUrl == "/recette/show/$recette.id"
         flash.message != null
         1 *myServiceUploadImg.updateImage("Marc",file,recette)
-
-    }
-
-    def "test qu'un utilisateur peut attribuer une note à une recette quand on fait appel à la fonction addNote"(){
-
-        given:"une recette, un utilisateur et des notes(clarté, gout, simplicité)"
-
-        populateValidParams(params)
-        def recette = new Recette(params)
-        recette.utilisateur=new Utilisateur(pseudo: "Marc",motDePasse: "motdepasse")
-        recette.utilisateur.id=2
-        recette.save()
-
-
-        Utilisateur mon_user = new Utilisateur()
-       mon_user.pseudo = 'Jean'
-        mon_user.id =1
-        mon_user.motDePasse="mdp"
-        mon_user.save()
-
-       def mes_notes = Mock(Notes)
-        mes_notes.clarte >> 2
-        mes_notes.simplicite >> 4
-        mes_notes.gout >> 0
-        List<Notes> list = new ArrayList<Notes>();
-        list.add(mes_notes);
-
-        mon_user.notes=new HashSet<Notes>(list);
-
-        def session = request.getSession(true)
-        session.setAttribute("utilisateur",mon_user)
-
-
-
-        def noteGout=1
-        def noteClarte=2
-        def noteSimplicite=3
-        controller.request.addParameter("gout","1")
-        controller.request.addParameter("clarte","2")
-        controller.request.addParameter("simplicite","3")
-
-        controller.apprecierRecetteService=apprecierRecetteService
-
-
-        when:"on enregistre la note"
-        controller.addNote(recette)
-
-
-        then:"on fait appel à la fonction noterRecette du service ApprecierRecetteService pour associer une note à la recette"
-
-        1 *apprecierRecetteService.noterRecette(recette,mon_user,noteGout,noteClarte,noteSimplicite)
 
     }
 
@@ -323,6 +270,57 @@ class RecetteControllerSpec extends Specification {
         then:"on fait appel à la fonction donnerCoupdecoeur du service ApprecierRecetteService pour associer un coup de coeur à la recette"
 
         1 *apprecierRecetteService.donnerCoupdecoeur(recette,mon_user)
+
+    }
+
+    def "test qu'un utilisateur peut attribuer une note à une recette quand on fait appel à la fonction addNote"(){
+
+        given:"une recette, un utilisateur et des notes(clarté, gout, simplicité)"
+
+        populateValidParams(params)
+        def recette = new Recette(params)
+        recette.utilisateur=new Utilisateur(pseudo: "Marc",motDePasse: "motdepasse")
+        recette.utilisateur.id=2
+        recette.save()
+
+
+        Utilisateur mon_user = new Utilisateur()
+        mon_user.pseudo = 'Jean'
+        mon_user.id =1
+        mon_user.motDePasse="mdp"
+        mon_user.save()
+
+        def mes_notes = Mock(Notes)
+        mes_notes.clarte >> 2
+        mes_notes.simplicite >> 4
+        mes_notes.gout >> 0
+        List<Notes> list = new ArrayList<Notes>();
+        list.add(mes_notes);
+
+        mon_user.notes=new HashSet<Notes>(list);
+
+        def session = request.getSession(true)
+        session.setAttribute("utilisateur",mon_user)
+
+
+
+        def noteGout=1
+        def noteClarte=2
+        def noteSimplicite=3
+        controller.request.addParameter("gout","1")
+        controller.request.addParameter("clarte","2")
+        controller.request.addParameter("simplicite","3")
+
+        controller.apprecierRecetteService=apprecierRecetteService
+
+
+        when:"on enregistre la note"
+        controller.addNote(recette)
+
+
+        then:"on fait appel à la fonction noterRecette du service ApprecierRecetteService pour associer une note à la recette"
+
+        1 *apprecierRecetteService.noterRecette(recette,mon_user,noteGout,noteClarte,noteSimplicite)
 
     }
 }

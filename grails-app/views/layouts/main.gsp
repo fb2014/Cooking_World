@@ -23,7 +23,7 @@
 <body>
 <div id="grailsLogo" role="banner">
     <div float="left" id="logo">
-        <img src="${resource(dir: 'images', file: 'CookingWorld_logo.png')}" alt="Grails"/>
+        <a href="${createLink(uri: '/recette/index')}"><img src="${resource(dir: 'images', file: 'CookingWorld_logo.png')}" alt="Grails"/></a>
     </div>
     <a href="#create-session" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
     <div style="margin-top:40px" float="right" id="create-session" class="content scaffold-create" role="main">
