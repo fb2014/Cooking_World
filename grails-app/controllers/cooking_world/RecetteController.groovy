@@ -249,8 +249,30 @@ class RecetteController {
             '*' { respond recetteInstance, [status: OK] }
         }
     }
+
+    //Ajouter un commentaire à une recette
+    def addCommentaire(Recette recetteInstance){
+        def commentaire=request.getParameter("monCommentaire").toString()
+        def currentUser
+        def userExist=session['utilisateur']
+        if (userExist==null){
+            currentUser=Utilisateur.findByPseudo('Anonyme')
+        }
+        else{
+            //recuperer le user connecté
+            currentUser=Utilisateur.get(session.utilisateur.id)
+        }
+        apprecierRecetteService.commenterRecette(recetteInstance,currentUser,commentaire)
+        request.withFormat {
+            form multipartForm {
+                redirect recetteInstance
+            }
+            '*' { respond recetteInstance, [status: OK] }
+        }
+    }
+
     def search() {
-        def results = Recette.findAllByTitreLike("%"+request.getParameter("tf_titre")+"%")
+        def results = Recette.findAllByTitreIlike("%"+request.getParameter("tf_titre")+"%")
         [recetteInstanceList:results]
     }
     def sort() {
@@ -262,7 +284,7 @@ class RecetteController {
             results = Recette.list(sort: "dateCreation")
         }
         else if(request.getParameter("tri") == "Durée") {
-            results = Recette.list(sort: "tempsPreparation")
+            results = Recette.list().sort {r1, r2 -> (r1.tempsPreparation + r1.tempsCuisson).compareTo(r2.tempsPreparation + r2.tempsCuisson)}
         }
         [recetteInstanceList:results]
     }
