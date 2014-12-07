@@ -23,7 +23,7 @@ class ApprecierRecetteService {
 
     def commenterRecette(Recette recetteInstance, Utilisateur user, String commentaire){
         if (recetteInstance?.validate() && user?.validate()) {
-            def newCommentaire = new Commentaire(message: commentaire)
+            def newCommentaire = new Commentaire(message: commentaire, dateCom: new Date())
             recetteInstance.addToCommentaire(newCommentaire)
             user.addToCommentaire(newCommentaire)
             if (newCommentaire.validate())

@@ -168,21 +168,22 @@
             <li class="fieldcontain">
                 <span  class="property-label"> Mon commentaire : </span>
                 <g:form url="[resource: recetteInstance, action: 'addCommentaire']" method="post">
-                    <g:textArea id="monCommentaire" name="monCommentaire"/>
-                    <input type="submit" name="validerCommentaire" value="Publier" />
+                    <g:textArea id="monCommentaire" name="monCommentaire" style="width: 500px; height: 30px;"/>
+                    <input type="submit" name="validerCommentaire" value="Publier" style="height: 40px;"/>
                 </g:form>
             </li>
         <!--fin traitement ajout de commentaire-->
 
             <g:if test="${recetteInstance?.commentaire}">
                 <li class="fieldcontain">
-                    <span id="commentaire-label" class="property-label"><g:message code="recette.commentaire.label"
-                                                                                   default="Commentaire :"/></span>
+                    <h1>Commentaires</h1>
+                    %{--<span id="commentaire-label" class="property-label"><g:message code="recette.commentaire.label"--}%
+                                                                                   %{--default="Commentaire :"/></span>--}%
 
-                    <g:each in="${recetteInstance.commentaire}" var="c">
-                        <span class="property-value" aria-labelledby="commentaire-label"><g:link controller="commentaire"
-                                                                                                 action="show"
-                                                                                                 id="${c.id}">${c?.encodeAsHTML()}</g:link></span>
+                    <g:each in="${recetteInstance.commentaire.sort {c1, c2 -> c1.dateCom.compareTo(c2.dateCom)}}" var="c">
+
+                        <g:render template="vignetteCommentaire" collection="${c}" />
+
                     </g:each>
 
                 </li>

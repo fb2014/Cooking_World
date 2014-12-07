@@ -25,6 +25,7 @@ class CommentaireSpec extends Specification {
         commentaire.message = unMessage
         commentaire.recette = uneRecette
         commentaire.utilisateur = unUtilisateur
+        commentaire.dateCom = uneDate
 
         when: "le commentaire est valide"
         def valid = commentaire.validate()
@@ -33,12 +34,14 @@ class CommentaireSpec extends Specification {
         valid == etatAttendu
 
         where:
-        unMessage | uneRecette    | unUtilisateur     | etatAttendu
-        "Hello."  | Mock(Recette) | Mock(Utilisateur) | true
-        "Hello."  | null          | Mock(Utilisateur) | false
-        "Hello."  | Mock(Recette) | null              | false
-        null      | Mock(Recette) | Mock(Utilisateur) | false
-        ""        | Mock(Recette) | Mock(Utilisateur) | false
+        unMessage | uneRecette    | unUtilisateur     | uneDate                | etatAttendu
+        "Hello."  | Mock(Recette) | Mock(Utilisateur) | new Date("10/10/2014") | true
+        "Hello."  | Mock(Recette) | Mock(Utilisateur) | new Date()             | true
+        "Hello."  | null          | Mock(Utilisateur) | new Date("10/10/2014") | false
+        "Hello."  | Mock(Recette) | null              | new Date("10/10/2014") | false
+        null      | Mock(Recette) | Mock(Utilisateur) | new Date("10/10/2014") | false
+        ""        | Mock(Recette) | Mock(Utilisateur) | new Date("10/10/2014") | false
+        "Hello."  | Mock(Recette) | Mock(Utilisateur) | null                   | false
 
 
     }

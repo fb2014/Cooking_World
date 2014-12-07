@@ -68,15 +68,15 @@ class InitialisationService {
         utilisateurMarie.addToNotes(notesMarieCookies)
         recetteCookies.addToNotes(notesMarieCookies).save(failOnError: true)
 
-        def commentaireMarieMacaron = new Commentaire(message: "Super recette. Génial, merci Alice, j'arrive enfin à faire mes macarons !!! :)")
+        def commentaireMarieMacaron = new Commentaire(dateCom: new Date(), message: "Super recette. Génial, merci Alice, j'arrive enfin à faire mes macarons !!! :)")
         utilisateurMarie.addToCommentaire(commentaireMarieMacaron)
         recetteMacaronsPistache.addToCommentaire(commentaireMarieMacaron).save(failOnError: true)
 
-        def commentairePaulMacaron = new Commentaire(message: "Je n'ai rien compris à la recette :(")
+        def commentairePaulMacaron = new Commentaire(dateCom: new Date(), message: "Je n'ai rien compris à la recette :(")
         utilisateurPaul.addToCommentaire(commentairePaulMacaron)
         recetteMacaronsPistache.addToCommentaire(commentairePaulMacaron).save(failOnError: true)
 
-        def commentaireMarcTartePommes = new Commentaire(message: "Recette très bien exliquée et très simple à réaliser. Auriez-vous la recette de la tarte tatin ?")
+        def commentaireMarcTartePommes = new Commentaire(dateCom: new Date(), message: "Recette très bien exliquée et très simple à réaliser. Auriez-vous la recette de la tarte tatin ?")
         utilisateurMarc.addToCommentaire(commentaireMarcTartePommes)
         recetteTartePommes.addToCommentaire(commentaireMarcTartePommes).save(failOnError: true)
 

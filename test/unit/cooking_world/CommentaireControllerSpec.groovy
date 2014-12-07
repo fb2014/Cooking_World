@@ -13,6 +13,7 @@ class CommentaireControllerSpec extends Specification {
         assert params != null
 
         params["message"] = "Hello"
+        params["dateCom"] = new Date()
         params["utilisateur.id"] = 1
         params["recette.id"] = 1
     }
