@@ -1,7 +1,6 @@
 package cooking_world
 
 import grails.transaction.Transactional
-import org.fusesource.jansi.AnsiConsole
 import org.springframework.web.multipart.MultipartFile
 
 @Transactional
