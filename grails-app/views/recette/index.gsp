@@ -11,7 +11,7 @@
 <body>
 <a href="#list-recette" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
                                                               default="Skip to content&hellip;"/></a>
-<h1><g:message code="Top des recettes" args="[entityName]"/></h1>
+<h1 style="padding-left: 30px;"><g:message code="Top des recettes" args="[entityName]"/></h1>
 
 <div style="display:table-cell;padding-left: 284px">
      <g:form url="[resource: it, action: 'sort']" method="DELETE">
