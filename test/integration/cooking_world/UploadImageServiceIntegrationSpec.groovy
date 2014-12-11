@@ -1,9 +1,5 @@
 package cooking_world
 
-import cooking_world.Recette
-import cooking_world.UploadImageService
-
-
 import org.springframework.web.multipart.MultipartFile
 import org.springframework.mock.web.MockMultipartFile
 
