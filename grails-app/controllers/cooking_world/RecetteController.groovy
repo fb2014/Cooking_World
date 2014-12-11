@@ -272,7 +272,7 @@ class RecetteController {
     }
 
     def search() {
-        def results = Recette.findAllByTitreIlike("%"+request.getParameter("tf_titre")+"%")
+        def results = Recette.findAllByTitreIlikeOrIngredientsIlikeOrDescriptionIlike("%"+request.getParameter("tf_titre")+"%", "%"+request.getParameter("tf_titre")+"%", "%"+request.getParameter("tf_titre")+"%")
         [recetteInstanceList:results]
     }
     def sort() {

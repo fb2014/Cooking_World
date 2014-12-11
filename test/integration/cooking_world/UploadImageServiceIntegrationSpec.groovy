@@ -1,3 +1,5 @@
+package cooking_world
+
 import cooking_world.Recette
 import cooking_world.UploadImageService
 
